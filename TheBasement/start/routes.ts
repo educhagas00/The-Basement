@@ -8,6 +8,7 @@
 */
 
 import UsersController from '#controllers/users_controller'
+import SignUpController from '#controllers/sign_up_controller'
 
 import router from '@adonisjs/core/services/router'
 
@@ -19,3 +20,6 @@ router
     })
     .prefix('users')
     .as('users')
+
+router.get('/signup', [SignUpController, 'index'])
+router.post('/signup', [SignUpController, 'store']) // Processa os dados do formulário
