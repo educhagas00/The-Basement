@@ -18,6 +18,22 @@ export default class SignUpController {
         return view.render('signup')
     }
 
+    show({ params, response }: HttpContext) {
+        
+        const email = params.email
+
+        for (const user of usersData) {
+            if (user.email === email) {
+                response.status(200)
+                return user
+            }
+        }
+
+        response.status(404)
+
+        return { message: 'not found' }
+    }
+
     public async store({ request, response }: HttpContext) {
         // Captura os dados do formulário (email e senha)
         const newSignUp = request.only(['email', 'senha'])

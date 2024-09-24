@@ -21,5 +21,11 @@ router
     .prefix('users')
     .as('users')
 
-router.get('/signup', [SignUpController, 'index'])
-router.post('/signup', [SignUpController, 'store']) // Processa os dados do formulário
+router
+    .group(() => {
+        router.get('/', [SignUpController, 'index']).as('index')
+        router.get('/:email', [SignUpController, 'show']).as('show')
+        router.post('/', [SignUpController, 'store']).as('create') // Processa os dados do formulário
+    })
+    .prefix('signup')
+    .as('signup')
