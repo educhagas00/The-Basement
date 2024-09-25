@@ -7,10 +7,11 @@
 |
 */
 
-import UsersController from '#controllers/users_controller'
-import SignUpController from '#controllers/sign_up_controller'
-
 import router from '@adonisjs/core/services/router'
+
+const UsersController = () => import('#controllers/users_controller')
+const SignUpController = () => import('#controllers/sign_up_controller')
+const ProductsController = () => import('#controllers/products_controller')
 
 router
     .group(() => {
@@ -29,3 +30,6 @@ router
     })
     .prefix('signup')
     .as('signup')
+
+router.get('/products', [ProductsController, 'index']).as('products.index')
+router.get('/products/:id', [ProductsController, 'show']).as('products.show')
