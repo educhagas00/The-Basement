@@ -17,8 +17,8 @@ const users = [
 
 export default class UsersController {
     
-    index() {
-        return users
+    async index({ view }: HttpContext) {
+        return view.render('users/usuarios', {users})
     }
 
     show({ params, response }: HttpContext) {
