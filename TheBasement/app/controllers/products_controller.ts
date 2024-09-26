@@ -11,8 +11,6 @@ export default class ProductsController {
     }
 
     async show({ params }: HttpContext) {
-        const product = await Product.create({ name: 'vmig' })
-
-        return product
+        
     }
 }
