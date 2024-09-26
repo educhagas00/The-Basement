@@ -96,7 +96,7 @@ form button {
     width: 100%;
     padding: 16px 0;
     font-size: 1rem;
-    background: #e50914;
+    background: #0f0135;
     color: #fff;
     font-weight: 500;
     border-radius: 4px;
@@ -108,7 +108,7 @@ form button {
 }
 
 form button:hover {
-    background: #c40812;
+    background: #460ccb;
 }
 
 .form-wrapper a {

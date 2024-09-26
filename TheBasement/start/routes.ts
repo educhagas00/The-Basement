@@ -11,6 +11,7 @@ import UsersController from '#controllers/users_controller'
 import SignUpController from '#controllers/sign_up_controller'
 
 import router from '@adonisjs/core/services/router'
+import ProductsController from '#controllers/products.controller'
 
 router
     .group(() => {
@@ -21,5 +22,16 @@ router
     .prefix('users')
     .as('users')
 
+
+//rotas de signup
+
 router.get('/signup', [SignUpController, 'index'])
 router.post('/signup', [SignUpController, 'store']) // Processa os dados do formulário
+
+// rotas de produtos 
+router.get('/products', [ProductsController, 'index']).as('products.index')
+router.get('/products/:id', [ProductsController, 'show']).as('products.show')
+router.post('/products', [ProductsController, 'store']).as('products.store')
+router.delete('/products/:id', [ProductsController, 'destroy']).as('products.destroy')
+router.patch('/products/:id', [ProductsController, 'patch']).as('products.patch')
+
