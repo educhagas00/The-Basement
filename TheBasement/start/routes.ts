@@ -31,5 +31,13 @@ router
     .prefix('signup')
     .as('signup')
 
-router.get('/products', [ProductsController, 'index']).as('products.index')
-router.get('/products/:id', [ProductsController, 'show']).as('products.show')
+router
+    .group(() => {
+        router.get('/', [ProductsController, 'index']).as('products.index')
+        router.get('/:id', [ProductsController, 'show']).as('products.show')
+        router.post('/', [ProductsController, 'store']).as('products.store')
+        router.delete('/:id', [ProductsController, 'destroy']).as('products.destroy')
+        router.patch('/:id', [ProductsController, 'update']).as('products.update')
+    })
+    .prefix('products')
+    .as('products')
