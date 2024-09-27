@@ -9,6 +9,7 @@ export default class ProductsController {
 
         const payload = request.only(['name'])
 
+        // esse cara sabe buscar em produtos!
         const query = Product.query()
 
         if (payload.name && payload.name.length > 0) {

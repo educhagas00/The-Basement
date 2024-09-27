@@ -15,7 +15,7 @@ const usersData = [
 export default class SignUpController {
     
     public async index({ view }: HttpContext) {
-        return view.render('signup')
+        return view.render('index')
     }
 
     show({ params, response }: HttpContext) {
