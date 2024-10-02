@@ -43,7 +43,7 @@ export default class UsersController {
         return { message: 'not found' }
     }
 
-    create({ request, response }: HttpContext) {
+    create({ request, response }: HttpContext) { 
 
         // pega apenas os parâmetros desejados do request
         const newUser = request.only(['name', 'email'])
@@ -62,4 +62,7 @@ export default class UsersController {
         return { message: 'foi'}
         // return response.redirect().toRoute('users.show', { id: sequence })
     }
+
+
+    
 }

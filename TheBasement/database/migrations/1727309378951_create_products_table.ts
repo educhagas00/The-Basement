@@ -12,6 +12,9 @@ export default class extends BaseSchema {
       // falar pra migration que existe um campo chamado name que é um var char
       table.string('name')
 
+      table.decimal('price').notNullable()
+      table.text('description').notNullable()
+
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

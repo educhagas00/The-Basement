@@ -4,12 +4,24 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 export default class ProductsController {
 
-    async index() {
-        const data = await fetch('https://fakestoreapi.com/products')
+    async index( {request}: HttpContext) {
+        // select * from users -> guarda em array (vlw vlw falou)
+        //const products = await Product.all()
 
-        // é preciso passar para json
-        const products = await data.json()
+        const page = request.input('page', 1)
+        const limit = 5
 
+        const payload = request.only(['name'])
+        // fazer uma filtragem para buscar todos os produtos que tenham o nome igual ao que foi passado
+
+        const query = Product.query()
+
+        if(payload.name && payload.name.length > 0) {
+            query.where('name', 'like', `%${payload.name}%`)
+
+        }
+
+        const products = await query.paginate(page, limit)
         return products
     }
 
@@ -23,7 +35,7 @@ export default class ProductsController {
 
     async store({ request }: HttpContext) { 
 
-        const payload = request.only(['name']) // se eu digitar outra coisa, corta
+        const payload = request.only(['name', 'price', 'description']) // se eu digitar outra coisa, corta
 
         const product = await Product.create(payload)
 
@@ -34,7 +46,7 @@ export default class ProductsController {
     async patch({params, request}: HttpContext) {
         const product = await Product.findOrFail(params.id)
 
-        const payload = await request.only(['name'])
+        const payload = await request.only(['name', 'price', 'description'])
         product.merge(payload)
 
         await product.save()
