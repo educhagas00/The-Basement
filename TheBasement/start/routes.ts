@@ -7,6 +7,8 @@
 |
 */
 
+import MoviesController from '#controllers/movies_controller'
+import SongsController from '#controllers/songs_controller'
 import router from '@adonisjs/core/services/router'
 
 const UsersController = () => import('#controllers/users_controller')
@@ -31,5 +33,27 @@ router
     .prefix('signup')
     .as('signup')
 
-router.get('/products', [ProductsController, 'index']).as('products.index')
-router.get('/products/:id', [ProductsController, 'show']).as('products.show')
+router
+    .group(() => {
+        router.get('/', [ProductsController, 'index']).as('products.index')
+        router.get('/:id', [ProductsController, 'show']).as('products.show')
+        router.post('/', [ProductsController, 'store']).as('products.store')
+        router.delete('/:id', [ProductsController, 'destroy']).as('products.destroy')
+        router.patch('/:id', [ProductsController, 'update']).as('products.update')
+    })
+    .prefix('products')
+    .as('products')
+
+router
+    .group(() => {
+        router.get('/', [MoviesController, 'index']).as('movies.index')
+        router.get('/:id', 'MoviesController.show').as('movies.show')
+        router.post('/', 'MoviesController.store').as('movies.store')
+    })
+    .prefix('movies')
+    .as('movies')
+
+router
+    .group(() => {
+        router.get('/', [SongsController, 'index']).as('songs.index')
+    })

@@ -46,6 +46,7 @@
     "hot-hook": "^0.2.6",
     "pino-pretty": "^11.2.2",
     "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.13",
     "ts-node-maintained": "^10.9.4",
     "typescript": "~5.5",
     "vite": "^5.4.2"
@@ -59,6 +60,7 @@
     "@adonisjs/static": "^1.1.1",
     "@adonisjs/vite": "^3.0.0",
     "@vinejs/vine": "^2.1.0",
+    "alpine": "^0.2.1",
     "better-sqlite3": "^11.3.0",
     "edge.js": "^6.0.2",
     "luxon": "^3.5.0",
