@@ -1,24 +1,24 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class Product extends BaseModel {
+export default class Movie extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare name: string
+  declare title: string
 
   @column()
-  declare price: number
+  declare year: number
+
+  @column()
+  declare genre: string
+
+  @column()
+  declare director: string
 
   @column()
   declare description: string
-
-  @column()
-  declare duration: number // in minutes
-
-  @column()
-  declare releaseDate: DateTime
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
