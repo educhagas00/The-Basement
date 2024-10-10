@@ -1,43 +1,38 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - www.codingnepalweb.com -->
-<html lang="en">
+
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Netflix Login Page | CodingNepal</title>
+    <title>Login</title>
+    <!-- Link para o CSS -->
     <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
 </head>
 <body>
-    <nav>
-        <video autoplay muted loop id="myVideo">
-            <source src="/home/educhagas00/Documents/The-Basement/TheBasement/resources/images/vecteezy_minimal-stars-motion-loop-background-for-project-overlay_2016656.mov" type="video/mp4">
-        </video>
-    </nav>
-    <div class="form-wrapper">
-        <h2>Sign In</h2>
-        <form action="#">
-            <div class="form-control">
-                <input type="text" required>
-                <label>Email or phone number</label>
-            </div>
-            <div class="form-control">
-                <input type="password" required>
-                <label>Senha</label>
-            </div>
-            <button type="submit">Entre</button>
-            <div class="form-help"> 
-                <div class="remember-me">
-                    <input type="checkbox" id="remember-me">
-                    <label for="remember-me">Remember me</label>
+    <div>
+        <!-- Include the Alpine library on your page -->
+        <script src="//unpkg.com/alpinejs" defer></script>
+
+        <!-- Include the TailwindCSS library on your page -->
+        <script src="https://cdn.tailwindcss.com"></script>
+    </div>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <label for="username">Usuário</label>
+                    <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
                 </div>
-                <a href="#">Need help?</a>
-            </div>
-        </form>
-        <p>New to The Basement? <a href="#">Cadastre-se</a></p>
-        <small>
-            This page is protected by Google reCAPTCHA to ensure you're not a bot. 
-            <a href="#">Learn more.</a>
-        </small>
+                <div class="input-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                </div>
+                <button type="submit" class="btn">Entrar</button>
+                <p class="signup-text">Não tem uma conta? <a href="/signup">Cadastre-se</a></p>
+            </form>
+        </div>
     </div>
 </body>
+
 </html>

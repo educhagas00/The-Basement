@@ -15,7 +15,23 @@ const usersData = [
 export default class SignUpController {
     
     public async index({ view }: HttpContext) {
-        return view.render('signup')
+        return view.render('index')
+    }
+
+    show({ params, response }: HttpContext) {
+        
+        const email = params.email
+
+        for (const user of usersData) {
+            if (user.email === email) {
+                response.status(200)
+                return user
+            }
+        }
+
+        response.status(404)
+
+        return { message: 'not found' }
     }
 
     public async store({ request, response }: HttpContext) {

@@ -9,5 +9,4 @@ export default class MoviesController {
     return await Movie.all()
 
   }
-
 }
