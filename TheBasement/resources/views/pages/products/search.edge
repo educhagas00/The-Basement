@@ -1,0 +1,16 @@
+@layouts.app() 
+    @form({ action: route('products.show') })
+        <div>
+            <label for="name">
+            Digite o nome do produto
+            </label>
+            @!input({
+            name: 'name',
+            type: 'text'
+            })
+        </div>
+        @button({ type: 'submit' }) 
+            Buscar
+        @end
+    @end
+@end

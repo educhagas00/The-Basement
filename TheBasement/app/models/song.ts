@@ -1,14 +1,15 @@
 import { DateTime } from 'luxon'
-import { column } from '@adonisjs/lucid/orm'
-import Product from '#models/product'
+import { BaseModel, column } from '@adonisjs/lucid/orm'
 
-export default class Song extends Product {
+export default class Song extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
   @column()
-  declare music_genre: string
+  declare songId: number
 
+  @column()
+  declare music_genre: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

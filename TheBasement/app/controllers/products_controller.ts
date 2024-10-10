@@ -45,6 +45,10 @@ export default class ProductsController {
         return view.render('pages/products/show', { product })
     }
 
+    async searchbar({ view }: HttpContext) {
+        return view.render('pages/products/searchbar')
+    }
+
     async update({ params, request }: HttpContext) {
         // busca um produto pelo id ou retorna um erro 404 caso não encontre
         const product = await Product.findOrFail(params.id)

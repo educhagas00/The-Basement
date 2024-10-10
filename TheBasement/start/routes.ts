@@ -39,6 +39,7 @@ router
 
         router.get('/new', [ProductsController, 'create']).as('create')
 
+        router.get('/search', [ProductsController, 'searchbar']).as('searchbar')
         router.get('/:id', [ProductsController, 'show']).as('show')
         router.post('/', [ProductsController, 'store']).as('store')
         router.delete('/:id', [ProductsController, 'destroy']).as('destroy')

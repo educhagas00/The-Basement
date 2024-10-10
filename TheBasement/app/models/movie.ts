@@ -6,6 +6,9 @@ export default class Movie extends BaseModel {
   declare id: number
 
   @column()
+  declare movieId: number
+
+  @column()
   declare title: string
 
   @column()
