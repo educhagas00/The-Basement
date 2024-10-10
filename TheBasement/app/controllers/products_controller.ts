@@ -42,7 +42,7 @@ export default class ProductsController {
         const product = await Product.findOrFail(params.id)
 
         // renderiza a view products.show com o produto encontrado
-        return view.render('products.show', { product })
+        return view.render('pages/products/show', { product })
     }
 
     async update({ params, request }: HttpContext) {
