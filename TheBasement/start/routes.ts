@@ -12,6 +12,7 @@ import SignUpController from '#controllers/sign_up_controller'
 
 import router from '@adonisjs/core/services/router'
 import ProductsController from '#controllers/products.controller'
+import MoviesController from '#controllers/movies_controller'
 
 router
     .group(() => {
@@ -34,5 +35,7 @@ router.get('/products/:id', [ProductsController, 'show']).as('products.show')
 router.post('/products', [ProductsController, 'store']).as('products.store')
 router.delete('/products/:id', [ProductsController, 'destroy']).as('products.destroy')
 router.patch('/products/:id', [ProductsController, 'patch']).as('products.patch')
+
+router.get('/movies', [MoviesController, 'index']).as('movies.index')
 
 
