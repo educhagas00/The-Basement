@@ -11,6 +11,13 @@ export default class extends BaseSchema {
       table.string('title').notNullable()
       table.text('description').notNullable()
 
+      table.decimal('price').notNullable()
+
+      table.integer('budget').notNullable()
+      table.integer('revenue').notNullable()
+      table.integer('runtime').notNullable()
+      table.timestamp('release_date').notNullable()
+
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

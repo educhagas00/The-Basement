@@ -14,16 +14,28 @@ export default class extends BaseSeeder {
       }
     };
     
-    const response = await fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR-US&page=1&sort_by=popularity.desc', options)
-    const moviesList:any = await response.json()
-    
-    for(const movieData of moviesList.results) { 
+    const movieIds = [693134, 414906, 339403, 680, 11, 24428, 9502, 24, 694, 238, 557, 244786]
+
+
+    for(const movieId of movieIds) {
+      const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR-US`, options)
+      const movieData:any = await response.json()
+
       const movie = new Movie()
       movie.movieId = movieData.id
       movie.title = movieData.title
       movie.description = movieData.overview
+
+      const price = Math.random() * ( ((100 - 50) + 50) ) // numero aleatorio entre 50 e 100
+      movie.price = parseFloat(price.toFixed(2))
+
+      movie.budget = movieData.budget
+      movie.revenue = movieData.revenue
+      movie.runtime = movieData.runtime
+      movie.releaseDate = movieData.release_date
+
       await movie.save()
     }
-    
+
   }
 }
