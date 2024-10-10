@@ -10,6 +10,8 @@
 import MoviesController from '#controllers/movies_controller'
 import SongsController from '#controllers/songs_controller'
 import router from '@adonisjs/core/services/router'
+import ProductsController from '#controllers/products.controller'
+import MoviesController from '#controllers/movies_controller'
 
 const UsersController = () => import('#controllers/users_controller')
 const SignUpController = () => import('#controllers/sign_up_controller')

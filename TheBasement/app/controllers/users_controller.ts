@@ -17,8 +17,8 @@ const users = [
 
 export default class UsersController {
     
-    index() {
-        return users
+    async index({ view }: HttpContext) {
+        return view.render('users/usuarios', {users})
     }
 
     show({ params, response }: HttpContext) {
@@ -43,7 +43,7 @@ export default class UsersController {
         return { message: 'not found' }
     }
 
-    create({ request, response }: HttpContext) {
+    create({ request, response }: HttpContext) { 
 
         // pega apenas os parâmetros desejados do request
         const newUser = request.only(['name', 'email'])
@@ -62,4 +62,7 @@ export default class UsersController {
         return { message: 'foi'}
         // return response.redirect().toRoute('users.show', { id: sequence })
     }
+
+
+    
 }
