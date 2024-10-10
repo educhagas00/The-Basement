@@ -7,6 +7,17 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
 
+      table.integer('movie_id').notNullable().unique()
+      table.string('title').notNullable()
+      table.text('description').notNullable()
+
+      table.decimal('price').notNullable()
+
+      table.integer('budget').notNullable()
+      table.integer('revenue').notNullable()
+      table.integer('runtime').notNullable()
+      table.timestamp('release_date').notNullable()
+
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })
