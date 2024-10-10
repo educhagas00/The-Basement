@@ -36,6 +36,6 @@ router.post('/products', [ProductsController, 'store']).as('products.store')
 router.delete('/products/:id', [ProductsController, 'destroy']).as('products.destroy')
 router.patch('/products/:id', [ProductsController, 'patch']).as('products.patch')
 
-router.get('/movies', [MoviesController, 'index']).as('movies.index')
+router.get('/movies', [MoviesController, 'index']).as('movies.index') // oi
 
 
