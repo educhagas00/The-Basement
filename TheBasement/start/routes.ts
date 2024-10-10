@@ -36,13 +36,14 @@ router
 router
     .group(() => {
         router.get('/', [ProductsController, 'index']).as('index')
-
         router.get('/new', [ProductsController, 'create']).as('create')
-
-        router.get('/search', [ProductsController, 'searchbar']).as('searchbar')
+        router.get('/search/:name?', [ProductsController, 'search']).as('search')
         router.get('/:id', [ProductsController, 'show']).as('show')
+
         router.post('/', [ProductsController, 'store']).as('store')
+
         router.delete('/:id', [ProductsController, 'destroy']).as('destroy')
+
         router.patch('/:id', [ProductsController, 'update']).as('update')
     })
     .prefix('products')
@@ -50,14 +51,14 @@ router
 
 router
     .group(() => {
-        router.get('/', [MoviesController, 'index']).as('movies.index')
-        router.get('/:id', 'MoviesController.show').as('movies.show')
-        router.post('/', 'MoviesController.store').as('movies.store')
+        router.get('/', [MoviesController, 'index']).as('index')
+        // router.get('/:id', 'MoviesController.show').as('show')
+        // router.post('/', 'MoviesController.store').as('store')
     })
     .prefix('movies')
     .as('movies')
 
 router
     .group(() => {
-        router.get('/', [SongsController, 'index']).as('songs.index')
+        // router.get('/', [SongsController, 'index']).as('index')
     })

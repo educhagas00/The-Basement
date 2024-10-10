@@ -27,6 +27,22 @@
         name: 'description',
         type: 'text'
       })
+      <div>
+        <label for="duration">
+          Duração
+        </label>
+        @!input({
+          name: 'duration',
+          type: 'number'
+      })
+      <div>
+        <label for="release_date">
+          Data de lançamento
+        </label>
+        @!input({
+          name: 'release_date',
+          type: 'date'
+      })
     </div>
     @button({
       type: 'submit'

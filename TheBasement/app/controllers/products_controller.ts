@@ -23,7 +23,7 @@ export default class ProductsController {
 
     async store({ request, response }: HttpContext) {
         // pega os dados do formulário
-        const payload = request.only(['name', 'price', 'description'])
+        const payload = request.only(['name', 'price', 'description', 'duration', 'release_date'])
 
         // cria um novo produto usando os dados do formulário e salva no banco de dados
         const product = await Product.create(payload)
@@ -45,11 +45,20 @@ export default class ProductsController {
         return view.render('pages/products/show', { product })
     }
 
-    async searchbar({ view }: HttpContext) {
-        return view.render('pages/products/searchbar')
+    async search({ view, request }: HttpContext) {
+        const name = request.input('name')
+        let products: Product[] = []
+
+        const query = Product.query()
+
+        if(name) {
+            products = await query.where('name', 'like', `%${name}%`)
+        }
+
+        return view.render('pages/products/search', { products })
     }
 
-    async update({ params, request }: HttpContext) {
+    async update({ params, request, response }: HttpContext) {
         // busca um produto pelo id ou retorna um erro 404 caso não encontre
         const product = await Product.findOrFail(params.id)
 
@@ -63,7 +72,7 @@ export default class ProductsController {
         await product.save()
 
         // retorna o produto atualizado
-        return product
+        return response.redirect().toRoute('products.show', { id: product.id })
     }
 
     async destroy({ params }: HttpContext) {
