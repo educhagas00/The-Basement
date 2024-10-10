@@ -3,7 +3,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 export default class ProductsController {
 
-    async index({ request }: HttpContext) {
+    async index({ view, request }: HttpContext) {
         const page = request.input('page', 1)
         const limit = 10
 
@@ -18,10 +18,10 @@ export default class ProductsController {
 
         const products = await query.paginate(page, limit)
 
-        return products
+        return view.render('pages/products/index', { products })
     }
 
-    async store({ request }: HttpContext) {
+    async store({ request, response }: HttpContext) {
         // pega os dados do formulário
         const payload = request.only(['name', 'price', 'description'])
 
@@ -29,15 +29,20 @@ export default class ProductsController {
         const product = await Product.create(payload)
 
         // retorna o produto criado
-        return product
+        return response.redirect().toRoute('products.show', { id: product.id })
     }
 
-    async show({ params }: HttpContext) {
+    async create({ view }: HttpContext) {
+        // renderiza a view products.create
+        return view.render('pages/products/create')
+    }
+
+    async show({ view, params }: HttpContext) {
         // busca um produto pelo id ou retorna um erro 404 caso não encontre
         const product = await Product.findOrFail(params.id)
 
-        // retorna o produto encontrado
-        return product
+        // renderiza a view products.show com o produto encontrado
+        return view.render('products.show', { product })
     }
 
     async update({ params, request }: HttpContext) {

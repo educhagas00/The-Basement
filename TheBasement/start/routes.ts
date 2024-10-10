@@ -35,11 +35,14 @@ router
 
 router
     .group(() => {
-        router.get('/', [ProductsController, 'index']).as('products.index')
-        router.get('/:id', [ProductsController, 'show']).as('products.show')
-        router.post('/', [ProductsController, 'store']).as('products.store')
-        router.delete('/:id', [ProductsController, 'destroy']).as('products.destroy')
-        router.patch('/:id', [ProductsController, 'update']).as('products.update')
+        router.get('/', [ProductsController, 'index']).as('index')
+
+        router.get('/new', [ProductsController, 'create']).as('create')
+
+        router.get('/:id', [ProductsController, 'show']).as('show')
+        router.post('/', [ProductsController, 'store']).as('store')
+        router.delete('/:id', [ProductsController, 'destroy']).as('destroy')
+        router.patch('/:id', [ProductsController, 'update']).as('update')
     })
     .prefix('products')
     .as('products')
