@@ -28,7 +28,7 @@ export default class extends BaseSeeder {
         const song = new Song()
         song.songId = songData.id
         song.name = songData.name
-        song.price = Math.random() * 100 // numero aleatorio
+        song.price = parseFloat((50 + Math.random() * 50).toFixed(2)) // numero aleatorio de 50 a 100 com 2 casas decimais
         song.description = songData.description || 'No description available'
         song.duration = songData.duration_ms / 1000 // Convertendo de milissegundos para segundos
         song.releaseDate = new Date(songData.album.release_date)
