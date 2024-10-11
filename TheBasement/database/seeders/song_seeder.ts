@@ -9,7 +9,7 @@ export default class extends BaseSeeder {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${process.env.SPOTIFY_ACCESS_TOKEN}`
-      }
+      } // o token de acesso (lá no .env) dura 1 hora! fazer o curl pelo terminal para pegar o token
     };
 
     const songIds = ['0VjIjW4GlUZAMYd2vXMi3b', '1Es7AUAhQvapIcoh3qMKDL', '3KyKxJ4P3pVCgaZwaq2rUC', '1sOW4PuG5X3Ie3EXUhAopJ', '2SLwbpExuoBDZBpjfefCtV']
