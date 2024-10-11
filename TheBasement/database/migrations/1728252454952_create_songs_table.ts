@@ -11,7 +11,7 @@ export default class extends BaseSchema {
       table.string('name').notNullable()
       table.decimal('price').notNullable()
       table.float('duration').notNullable()
-      table.date('release_date').notNullable()
+      table.timestamp('release_date').notNullable()
       // table.integer('genre_id').notNullable()
       // table.integer('album_id').notNullable()
 
