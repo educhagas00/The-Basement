@@ -26,7 +26,7 @@ export default class extends BaseSeeder {
 
         // cria um novo song usando os dados da response e salva no banco de dados
         const song = new Song()
-        song.songId = parseInt(songData.id)
+        song.songId = songData.id
         song.name = songData.name
         song.price = Math.random() * 100 // numero aleatorio
         song.description = songData.description || 'No description available'
