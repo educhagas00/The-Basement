@@ -24,7 +24,7 @@ cp .env.example .env
 npm install
 ```
 
-## Execute
+## Run
 ```console
 npm run dev
 ```
