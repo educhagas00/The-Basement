@@ -1,5 +1,5 @@
 <br><p align="center">
-<img height="100px" src="https://github.com/user-attachments/assets/72c183f1-59f2-4b5b-830d-d8ac612bd7ea" />
+<img height="100px" src="TheBasement/resources/images/porta branca.png" />
 </p>
 
 <h1 align="center">The Basement</h1>
