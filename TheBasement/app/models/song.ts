@@ -13,9 +13,6 @@ export default class Song extends BaseModel {
 
   @column()
   declare price: number
-  
-  @column()
-  declare description: string
 
   @column()
   declare duration: number
