@@ -7,13 +7,13 @@
 |
 */
 
-import MoviesController from '#controllers/movies_controller'
-import SongsController from '#controllers/songs_controller'
 import router from '@adonisjs/core/services/router'
 
 const UsersController = () => import('#controllers/users_controller')
 const SignUpController = () => import('#controllers/sign_up_controller')
 const ProductsController = () => import('#controllers/products_controller')
+const MoviesController = () => import('#controllers/movies_controller')
+const SongsController = ()=> import('#controllers/songs_controller')
 
 router
     .group(() => {
@@ -35,25 +35,30 @@ router
 
 router
     .group(() => {
-        router.get('/', [ProductsController, 'index']).as('products.index')
-        router.get('/:id', [ProductsController, 'show']).as('products.show')
-        router.post('/', [ProductsController, 'store']).as('products.store')
-        router.delete('/:id', [ProductsController, 'destroy']).as('products.destroy')
-        router.patch('/:id', [ProductsController, 'update']).as('products.update')
+        router.get('/', [ProductsController, 'index']).as('index')
+        router.get('/new', [ProductsController, 'create']).as('create')
+        router.get('/search/:name?', [ProductsController, 'search']).as('search')
+        router.get('/:id', [ProductsController, 'show']).as('show')
+
+        router.post('/', [ProductsController, 'store']).as('store')
+
+        router.delete('/:id', [ProductsController, 'destroy']).as('destroy')
+
+        router.patch('/:id', [ProductsController, 'update']).as('update')
     })
     .prefix('products')
     .as('products')
 
 router
     .group(() => {
-        router.get('/', [MoviesController, 'index']).as('movies.index')
-        router.get('/:id', 'MoviesController.show').as('movies.show')
-        router.post('/', 'MoviesController.store').as('movies.store')
+        router.get('/', [MoviesController, 'index']).as('index')
+        // router.get('/:id', 'MoviesController.show').as('show')
+        // router.post('/', 'MoviesController.store').as('store')
     })
     .prefix('movies')
     .as('movies')
 
 router
     .group(() => {
-        router.get('/', [SongsController, 'index']).as('songs.index')
+        // router.get('/', [SongsController, 'index']).as('index')
     })
