@@ -16,10 +16,10 @@ export default class extends BaseSchema {
       table.integer('genre_id').notNullable()
       table.integer('album_id').notNullable()
 
-      table.primary(['id', 'song_id'])
+      // table.primary(['id', 'song_id'])
 
-      table.foreign('genre_id').references('id').inTable('genres')
-      table.foreign('album_id').references('id').inTable('albums')
+      // table.foreign('genre_id').references('id').inTable('genres')
+      // table.foreign('album_id').references('id').inTable('albums')
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

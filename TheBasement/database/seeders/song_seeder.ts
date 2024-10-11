@@ -25,7 +25,7 @@ export default class extends BaseSeeder {
       song.name = songData.name
       song.price = Math.random() * 100 // numero aleatorio entre 0 e 100
       song.description = songData.album.name
-      song.duration = songData.duration_ms
+      song.duration = songData.duration_ms / 1000 // passa para segundos
       song.releaseDate = songData.album.release_date
       song.genreId = 1
       song.albumId = 1
