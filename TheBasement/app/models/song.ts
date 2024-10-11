@@ -9,7 +9,25 @@ export default class Song extends BaseModel {
   declare songId: number
 
   @column()
-  declare music_genre: string
+  declare name: string
+
+  @column()
+  declare price: number
+  
+  @column()
+  declare description: string
+
+  @column()
+  declare duration: number
+
+  @column()
+  declare releaseDate: Date
+
+  @column()
+  declare genreId: number
+
+  @column()
+  declare albumId: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
