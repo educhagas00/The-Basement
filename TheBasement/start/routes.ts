@@ -13,7 +13,7 @@ const UsersController = () => import('#controllers/users_controller')
 const SignUpController = () => import('#controllers/sign_up_controller')
 const ProductsController = () => import('#controllers/products_controller')
 const MoviesController = () => import('#controllers/movies_controller')
-const SongsController = ()=> import('#controllers/songs_controller')
+// const SongsController = ()=> import('#controllers/songs_controller')
 
 router
     .group(() => {
