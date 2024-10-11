@@ -12,8 +12,28 @@ export default class extends BaseSeeder {
       } // o token de acesso (lá no .env) dura 1 hora! fazer o curl pelo terminal para pegar o token
     };
 
-    const songIds = ['0VjIjW4GlUZAMYd2vXMi3b', '1Es7AUAhQvapIcoh3qMKDL', '3KyKxJ4P3pVCgaZwaq2rUC', '1sOW4PuG5X3Ie3EXUhAopJ', '2SLwbpExuoBDZBpjfefCtV']
+    const albumIds = ['2nLOHgzXzwFEpl62zAgCEC', '6YlDIxqEjvY63ffH6AwCjd', '5EbpxRwbbpCJUepbqVTZ1U', '3iPSVi54hsacKKl1xIR2eH', '2ANVost0y2y52ema1E9xAZ', '3cN3mENkACWuRCDOuQUtfw']
 
+    const songIds = []
+
+    for (const albumId of albumIds) {
+      try {
+        const response: any = await fetch(`https://api.spotify.com/v1/albums/${albumId}/tracks`, options)
+
+        if (!response.ok) {
+          console.error(`Failed to fetch album with ID ${albumId}: ${response.statusText}`)
+          continue
+        }
+
+        // adiciona os ids das músicas do álbum à lista de ids de músicas
+        songIds.push(...(await response.json()).items.map((item: any) => item.id))
+      }
+      
+      catch (error) {
+        console.error(`Error fetching album with ID ${albumId}:`, error)
+      }
+    }
+    
     for (const songId of songIds) {
       try {
         const response = await fetch(`https://api.spotify.com/v1/tracks/${songId}`, options)
@@ -23,7 +43,7 @@ export default class extends BaseSeeder {
           continue
         }
 
-        const songData:any = await response.json()
+        const songData: any = await response.json()
 
         // cria um novo song usando os dados da response e salva no banco de dados
         const song = new Song()
@@ -36,7 +56,9 @@ export default class extends BaseSeeder {
         // song.albumId = 1 // Defina um valor padrão ou ajuste conforme necessário
 
         await song.save()
-      } catch (error) {
+      }
+      
+      catch (error) {
         console.error(`Error fetching song with ID ${songId}:`, error)
       }
     }
