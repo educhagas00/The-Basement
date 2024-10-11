@@ -7,7 +7,7 @@
 
 Feeling a little nostalgic? You're almost there, but don't panic. There's still more to come before you're completely engulfed in the blissful embrace of that little light you see in the distance. Soon you'll be healed, forgiven, and refreshed, free from all trauma, pain, guilt and shame. You may even forget your own name, but before you dwell in that house forever, please be welcome to explore our VHS and Vinyl e-commerce store and try not to dig on every possible item we gather just for you! But remember: Buckle up, because now you are in **THE BASEMENT**.
 
-## Instalação
+## Installation
 
 1 - Create temporary folder to SQLite DB
 ```console
