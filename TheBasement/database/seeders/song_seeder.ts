@@ -1,14 +1,15 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import Song from '#models/song'
-
+import dotenv from 'dotenv'
+dotenv.config()
 
 export default class extends BaseSeeder {
   async run() {
     const options = {
       method: 'GET',
       headers: {
-        Authorization: 'Bearer BQD3Jc_AQCP0tn3nbzTQQnADS4f3lRx_zW0RtR0CY-WDrUqcOsswBtHVkkQ56P7NztTFCFsdYYmEhVXWUFfu232ls2HcXa6vmvNpgapvbEgLh_1s4G4'
-      } // o token de acesso dura 1 hora! fazer o curl pelo terminal para pegar o token
+        Authorization: `Bearer ${process.env.SPOTIFY_ACCESS_TOKEN}`
+      }
     };
 
     const songIds = ['0VjIjW4GlUZAMYd2vXMi3b', '1Es7AUAhQvapIcoh3qMKDL', '3KyKxJ4P3pVCgaZwaq2rUC', '1sOW4PuG5X3Ie3EXUhAopJ', '2SLwbpExuoBDZBpjfefCtV']
