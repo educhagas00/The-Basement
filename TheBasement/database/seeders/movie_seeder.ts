@@ -26,7 +26,7 @@ export default class extends BaseSeeder {
       movie.title = movieData.title
       movie.description = movieData.overview
 
-      const price = Math.random() * ( ((100 - 50) + 50) ) // numero aleatorio entre 50 e 100
+      const price = parseFloat((50 + Math.random() * 50).toFixed(2)) // numero aleatorio entre 50 e 100
       movie.price = parseFloat(price.toFixed(2))
 
       movie.budget = movieData.budget
