@@ -1,2 +1,23 @@
-# E-Movies
-Projeto de E-Commerce para a disciplina de Programação para Web
+# The Basement
+
+## Instalação
+
+1 - Criar a pasta temporária para o banco SQLite
+```console
+mkdir tmp
+```
+
+2 - Criar o ``.env``
+```console
+cp .env.example .env
+```
+
+3 - Instalar as dependências
+```console
+npm install
+```
+
+## Execução
+```console
+npm run dev
+```
