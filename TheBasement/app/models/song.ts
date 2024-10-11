@@ -5,7 +5,7 @@ export default class Song extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @column()
+  @column({ columnName: 'song_id' })
   declare songId: number
 
   @column()
@@ -20,14 +20,14 @@ export default class Song extends BaseModel {
   @column()
   declare duration: number
 
-  @column()
+  @column({ columnName: 'release_date' })
   declare releaseDate: Date
 
-  @column()
-  declare genreId: number
+  // @column({ columnName: 'genre_id' })
+  // declare genreId: number
 
-  @column()
-  declare albumId: number
+  // @column()
+  // declare albumId: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
