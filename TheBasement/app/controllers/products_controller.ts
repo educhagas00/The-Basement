@@ -9,6 +9,8 @@ export default class ProductsController {
 
         const payload = request.only(['name'])
 
+        console.log(payload)
+
         // esse cara sabe buscar em produtos!
         const query = Product.query()
 
