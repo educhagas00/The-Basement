@@ -8,8 +8,6 @@ export default class SongsController {
 
         const payload = request.only(['name'])
 
-        console.log(payload)
-
         // esse cara sabe buscar em Songs!
         const query = Song.query()
 
