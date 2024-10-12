@@ -4,7 +4,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 export default class ProductsController {
 
-    async index( {request}: HttpContext) {
+    async index({ view, request }: HttpContext) {
         // select * from users -> guarda em array (vlw vlw falou)
         //const products = await Product.all()
 
@@ -22,15 +22,16 @@ export default class ProductsController {
         }
 
         const products = await query.paginate(page, limit)
-        return products
+        
+        return view.render('pages/products/index', {products})
     }
 
     //mostrar produto especifico
-    async show({params}: HttpContext) {
+    async show({view, params}: HttpContext) {
 
         const product = await Product.findOrFail(params.id) // achar pelo id
 
-        return product
+        return view.render('pages/products/show', { product })
     }
 
     async store({ request }: HttpContext) { 

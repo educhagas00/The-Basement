@@ -38,4 +38,15 @@ router.patch('/products/:id', [ProductsController, 'patch']).as('products.patch'
 
 router.get('/movies', [MoviesController, 'index']).as('movies.index') // oi
 
+router.get('/', ({ view }) => {
+    // passo qual o motor de template e quais dados que quero que meu motor ensira no template e compile
+    
 
+    const products = [{name: 'Filme 1'}, { name: 'Filme 2'}]
+    return view.render('pages/home', {email: 'duduzin@gmail.com', products: products}) 
+})
+
+router.post('/login', ({ request }) => {
+    console.log(request.all())
+    return 'FIZ LOGIN'
+})
