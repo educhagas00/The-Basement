@@ -1,5 +1,6 @@
 import Product from '#models/product'
 import type { HttpContext } from '@adonisjs/core/http'
+import ViteMiddleware from '@adonisjs/vite/vite_middleware'
 
 
 export default class ProductsController {
@@ -34,13 +35,17 @@ export default class ProductsController {
         return view.render('pages/products/show', { product })
     }
 
-    async store({ request }: HttpContext) { 
+    async store({ response, request }: HttpContext) { 
 
         const payload = request.only(['name', 'price', 'description']) // se eu digitar outra coisa, corta
 
         const product = await Product.create(payload)
 
-        return product
+        return response.redirect().toRoute('products.show', { id: product.id })
+    }
+
+    async create( { view }: HttpContext) {
+        return view.render('pages/products/create')
     }
 
     // atualizar

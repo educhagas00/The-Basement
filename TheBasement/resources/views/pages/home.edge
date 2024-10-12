@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,7 +18,7 @@
         <ul>
           @each(product in products)
             <li>
-              <a href="#">{{product.name}}</a>
+              <a href="{{`/products/${product.id}`}}">{{product.name}}</a> - {{product.price}} - {{product.description}}
             </li>
           @end
         </ul>  
