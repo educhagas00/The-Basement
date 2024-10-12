@@ -1,0 +1,25 @@
+@layouts.app()
+<main>
+    <div>
+        <div>Músicas</div>
+        <ul>
+            @each(song in songs)
+            <li>
+                <a href="{{ route('songs.show', { id: song.id }) }}">
+                    {{song.name}}
+                </a>
+                - {{ song.price }}
+            </li>
+            @end
+        </ul>
+        <div>
+            @if(songsJson.meta.currentPage > songsJson.meta.firstPage)
+            <a href="{{ route('songs.index', { page: songsJson.meta.previousPageUrl }) }}">Anterior</a>
+            @endif
+            @if(songsJson.meta.currentPage < songsJson.meta.lastPage)
+            <a href="{{ route('songs.index', { page: songsJson.meta.nextPageUrl }) }}">Próxima</a>
+            @endif
+        </div>
+    </div>
+</main>
+@end

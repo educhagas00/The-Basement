@@ -60,7 +60,8 @@ router
 
 router
     .group(() => {
-        router.get('/', [SongsController, 'index']).as('index')
+        router.get('/:page?', [SongsController, 'index']).as('index')
+        router.get('/findbyid/:id', [SongsController, 'show']).as('show')
     })
     .prefix('songs')
     .as('songs')
