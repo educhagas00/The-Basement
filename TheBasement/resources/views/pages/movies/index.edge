@@ -1,0 +1,25 @@
+@layouts.app()
+<main>
+    <div>
+        <div>Filmes</div>
+        <ul>
+            @each(movie in movies)
+            <li>
+                <a href="{{ route('movies.show', { id: movie.id }) }}" class="nav-link">
+                    {{movie.title}}
+                </a>
+                - {{ movie.price }}
+            </li>
+            @endeach
+        </ul>
+        <div>
+            @if(moviesJson.meta.currentPage > moviesJson.meta.firstPage)
+            <a href="{{ route('movies.index', { page: moviesJson.meta.previousPageUrl }) }}">Anterior</a>
+            @endif
+            @if(moviesJson.meta.currentPage < moviesJson.meta.lastPage)
+            <a href="{{ route('movies.index', { page: moviesJson.meta.nextPageUrl }) }}">Próxima</a>
+            @endif
+        </div>
+    </div>
+</main>
+@end

@@ -63,6 +63,7 @@
     "@adonisjs/vite": "^3.0.0",
     "@vinejs/vine": "^2.1.0",
     "alpine": "^0.2.1",
+    "alpinejs": "^3.14.1",
     "better-sqlite3": "^11.3.0",
     "edge.js": "^6.0.2",
     "luxon": "^3.5.0",
