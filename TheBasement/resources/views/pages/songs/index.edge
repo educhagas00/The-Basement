@@ -5,7 +5,7 @@
         <ul>
             @each(song in songs)
             <li>
-                <a href="{{ route('songs.show', { id: song.id }) }}">
+                <a href="{{ route('songs.show', { id: song.id }) }}" class="nav-link">
                     {{song.name}}
                 </a>
                 - {{ song.price }}
