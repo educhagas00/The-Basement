@@ -15,7 +15,7 @@ export default class SongsController {
         // se o campo name estiver preenchido, filtra pelo nome
         if (payload.name && payload.name.length > 0) {
             query.where('name', 'like', `%${payload.name}%`)
-        } 
+        }
         
         // busca as músicas com paginação
         const songs = await query.paginate(page, limit)
