@@ -2,14 +2,23 @@
 <html>
 
 <head>
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js']) 
     <title>The Basement</title>
 </head>
 
 <body>
-    @include('components/layouts/partials/header')
+    <div>
+        {{-- @include('components/layouts/partials/background')  --}}
+        <div>
+            @include('components/layouts/partials/header')
+
     
-    {{{ await $slots.main() }}}
+            {{{ await $slots.main() }}}
+        
+            @include('components/layouts/partials/footer')
+        </div>
+    </div>
+
 </body>
 
 </html>
