@@ -63,10 +63,16 @@ router
         // cria uma música (redireciona para a tela de criação)
         // cuidado para o .index não capturar essa rota!!! (estava pegando como :page?)
         router.get('/addTrack', [SongsController, 'addTrack']).as('addtrack')
+        
+        // renderiza tela de busca de música
+        router.get('/search/:info?', [SongsController, 'searchTrack']).as('search')
+        // mostra uma música pelo nome
+        router.get('/showbyname/:name?', [SongsController, 'showTrackByName']).as('showname')
+        // mostra uma música pelo id
+        router.get('/showbyid/:id?', [SongsController, 'showTrackById']).as('showid')
+
         // lista todas as músicas
         router.get('/:page?', [SongsController, 'index']).as('index')
-        // mostra uma música pelo id
-        router.get('/findbyid/:id', [SongsController, 'show']).as('show')
 
         // cria uma música no banco de dados a partir da API do Spotify
         router.post('/', [SongsController, 'store']).as('store')
