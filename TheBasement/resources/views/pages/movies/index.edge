@@ -2,9 +2,6 @@
 <main>
     <div>
         <div>Filmes</div>
-        dadahs
-        ashdjashd
-        dasjhad
         <ul>
             @each(movie in movies)
             <li>
@@ -13,7 +10,7 @@
                 </a>
                 - {{ movie.price }}
             </li>
-            @end
+            @endeach
         </ul>
         <div>
             @if(moviesJson.meta.currentPage > moviesJson.meta.firstPage)

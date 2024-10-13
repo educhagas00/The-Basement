@@ -17,11 +17,11 @@ export default class MoviesController {
         query.where('title', 'like', `%${payload.title}%`)
     }
 
-    const movie = await query.paginate(page, limit)
-    const moviesJson = movie.toJSON()
+    const movies = await query.paginate(page, limit)
+    const moviesJson = movies.toJSON()
 
     // return songsJson
-    return view.render('pages/movies/index', { movie, moviesJson })
+    return view.render('pages/movies/index', { movies, moviesJson })
 
   }
 
