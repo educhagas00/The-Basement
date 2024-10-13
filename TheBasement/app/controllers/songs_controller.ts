@@ -52,7 +52,7 @@ export default class SongsController {
         await song.save()
 
         // retorna o produto criado
-        return response.redirect().toRoute('songs.show', { id: song.id })
+        return response.redirect().toRoute('songs.showid', { id: song.id })
     }
 
     // cria uma música (redireciona para a tela de criação)
@@ -80,13 +80,13 @@ export default class SongsController {
         return view.render('pages/songs/searchTrack', { songs })
     }
 
-    async showTrackByName({ view, params }: HttpContext) {
-        // busca um Song pelo id ou retorna um erro 404 caso não encontre
-        const song = await Song.findBy('name', params.name)
+    // async showTrackByName({ view, params }: HttpContext) {
+    //     // busca um Song pelo id ou retorna um erro 404 caso não encontre
+    //     const song = await Song.findBy('name', params.name)
 
-        // renderiza a view Songs.show com o Song encontrado
-        return view.render('pages/songs/show', { song })
-    }
+    //     // renderiza a view Songs.show com o Song encontrado
+    //     return view.render('pages/songs/show', { song })
+    // }
     
     // mostra uma música pelo id
     async showTrackById({ view, params }: HttpContext) {

@@ -18,7 +18,7 @@ export default class Song extends BaseModel {
   declare duration: number
 
   @column({ columnName: 'release_date' })
-  declare releaseDate: Date
+  declare releaseDate: DateTime
 
   // @column({ columnName: 'genre_id' })
   // declare genreId: number
