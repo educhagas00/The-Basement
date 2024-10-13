@@ -36,7 +36,7 @@ export default class ProductsController {
 
     async create({ view }: HttpContext) {
         // renderiza a view products.create
-        return view.render('pages/products/create')
+        return view.render('pages/songs/addTrack')
     }
 
     async show({ view, params }: HttpContext) {

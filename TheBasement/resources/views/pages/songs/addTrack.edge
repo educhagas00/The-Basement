@@ -1,0 +1,20 @@
+@layouts.app() 
+
+    @form({ action: route('songs.store') })
+        <div>
+            <label for="songId">
+                Id da música
+            </label>
+            @!input({
+                name: 'songId',
+                type: 'text',
+                id: 'songId'
+            })
+        </div>
+        <div>
+            @button({ type: 'submit' })
+                Criar música
+            @end
+        </div>
+    @end
+@end
