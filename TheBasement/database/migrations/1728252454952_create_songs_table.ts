@@ -20,6 +20,8 @@ export default class extends BaseSchema {
       // table.foreign('genre_id').references('id').inTable('genres')
       // table.foreign('album_id').references('id').inTable('albums')
 
+      table.string('cover_path').notNullable()
+
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

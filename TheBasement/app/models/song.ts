@@ -26,6 +26,9 @@ export default class Song extends BaseModel {
   // @column()
   // declare albumId: number
 
+  @column({ columnName: 'cover_path' })
+  declare coverPath: string
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

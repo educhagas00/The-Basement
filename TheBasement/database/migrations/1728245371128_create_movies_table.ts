@@ -18,6 +18,8 @@ export default class extends BaseSchema {
       table.integer('runtime').notNullable()
       table.timestamp('release_date').notNullable()
 
+      table.string('poster_path').notNullable()
+
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

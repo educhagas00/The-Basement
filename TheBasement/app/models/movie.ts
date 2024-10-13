@@ -5,7 +5,7 @@ export default class Movie extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @column()
+  @column({ columnName: 'movie_id' })
   declare movieId: number
 
   @column()
@@ -28,6 +28,9 @@ export default class Movie extends BaseModel {
 
   @column()
   declare releaseDate: DateTime
+
+  @column({ columnName: 'poster_path' })
+  declare posterPath: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

@@ -55,6 +55,8 @@ export default class extends BaseSeeder {
         // song.genreId = 1 // Defina um valor padrão ou ajuste conforme necessário
         // song.albumId = 1 // Defina um valor padrão ou ajuste conforme necessário
 
+        song.coverPath = songData.album.images[0].url
+
         await song.save()
       }
       

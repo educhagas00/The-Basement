@@ -33,6 +33,7 @@ export default class extends BaseSeeder {
       movie.revenue = movieData.revenue
       movie.runtime = movieData.runtime
       movie.releaseDate = movieData.release_date
+      movie.posterPath = movieData.poster_path
 
       await movie.save()
     }
