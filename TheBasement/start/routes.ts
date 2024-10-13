@@ -66,7 +66,7 @@ router
         // renderiza tela de busca de música
         router.get('/search/:info?', [SongsController, 'searchTrack']).as('search')
         // mostra uma música pelo nome
-        router.get('/showbyname/:name?', [SongsController, 'showTrackByName']).as('showname')
+        // router.get('/showbyname/:name?', [SongsController, 'showTrackByName']).as('showname')
         // mostra uma música pelo id
         router.get('/showbyid/:id?', [SongsController, 'showTrackById']).as('showid')
 
