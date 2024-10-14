@@ -24,5 +24,16 @@
         </div>
         @end
     </div>
+    <br>
+    <center>
+        <div>
+            @if(songsJson.meta.currentPage > songsJson.meta.firstPage)
+            <a href="{{ route('songs.index', { page: songsJson.meta.previousPageUrl }) }}">Anterior</a>
+            @endif
+            @if(songsJson.meta.currentPage < songsJson.meta.lastPage)
+            <a href="{{ route('songs.index', { page: songsJson.meta.nextPageUrl }) }}">Próxima</a>
+            @endif
+    </div>
+    </center>
 </div>
 @end
