@@ -1,5 +1,5 @@
 <br><p align="center">
-<img height="100px" src="TheBasement/resources/images/porta branca.png" />
+<img height="100px" src="TheBasement/resources/images/porta_branca.png" />
 </p>
 
 <h1 align="center">The Basement</h1>

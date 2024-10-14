@@ -1,0 +1,51 @@
+@layouts.app() 
+    @form({ action: route('songs.search'), method: 'GET' })
+        <div>
+            <label for="name">
+                Nome da música
+            </label>
+            @!input({
+                name: 'name',
+                type: 'text',
+                id: 'name'
+            })
+        </div>
+        <div>
+            @button({ type: 'submit' })
+                Buscar música por nome
+            @end
+        </div>
+    @endform
+    @form({ action: route('songs.search'), method: 'GET' })
+        <div>
+            <label for="name">
+                Id da música
+            </label>
+            @!input({
+                name: 'id',
+                type: 'text',
+                id: 'id'
+            })
+        </div>
+        <div>
+            @button({ type: 'submit' })
+                Buscar música por Id
+            @end
+        </div>
+    @endform
+
+    {{-- quando houver uma busca, entra nesse if --}}
+    @if (songs && songs.length > 0)
+        <h2>Resultados da Busca:</h2>
+        <ul>
+            @each(song in songs)
+                <li>
+                    <h3>{{ song.name }}</h3>
+                    <p>Preço: R$ {{ song.price }}</p>
+                </li>
+            @endeach
+        </ul>
+    @else
+        <p>Nenhuma música encontrada.</p>
+    @endif
+@end
