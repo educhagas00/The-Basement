@@ -1,5 +1,4 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import Song from '#models/song'
 import Album from '#models/album'
 
 export default class AlbumsController {
