@@ -14,8 +14,8 @@ export default class Album extends BaseModel {
   @column()
   declare price: number
 
-  @column()
-  declare duration: number
+  // @column()
+  // declare duration: number
 
   @column({ columnName: 'release_date' })
   declare releaseDate: DateTime

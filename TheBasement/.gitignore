@@ -25,3 +25,4 @@ yarn-error.log
 .DS_Store
 
 gerador_access_token.txt
+secret.txt

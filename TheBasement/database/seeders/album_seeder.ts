@@ -17,7 +17,7 @@ export default class extends BaseSeeder {
     
     for (const albumId of albumIds) {
       try {
-        const response: any = await fetch(`https://api.spotify.com/v1/albums/${albumId}/tracks`, options)
+        const response: any = await fetch(`https://api.spotify.com/v1/albums/${albumId}`, options)
 
         if (!response.ok) {
           console.error(`Failed to fetch album with ID ${albumId}: ${response.statusText}`)
@@ -30,10 +30,10 @@ export default class extends BaseSeeder {
         album.albumId = albumData.id
         album.name = albumData.name
         album.price = parseFloat((50 + Math.random() * 50).toFixed(2)) // numero aleatorio de 50 a 100 com 2 casas decimais
-        album.duration = parseFloat((albumData.duration_ms / 60000).toFixed(2)) // Convertendo de milissegundos para segundos
-        album.releaseDate = albumData.album.release_date
+        // album.duration = parseFloat((albumData.duration_ms / 60000).toFixed(2)) // Convertendo de milissegundos para segundos
+        album.releaseDate = albumData.release_date
 
-        album.coverPath = albumData.album.images[0].url
+        album.coverPath = albumData.images[0].url
 
         await album.save()
       }

@@ -75,6 +75,9 @@ router
 
         // cria uma música no banco de dados a partir da API do Spotify
         router.post('/', [SongsController, 'store']).as('store')
+
+        router.get('/albums/index/uiuiui', [SongsController, 'indexAlbum']).as('albums')
+        router.get('/albums/show/:id?', [SongsController, 'albumId']).as('albumid')
     })
     .prefix('songs')
     .as('songs')
