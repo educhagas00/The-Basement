@@ -5,9 +5,9 @@
     <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 bg-rich-black">
         @each(song in songs)
         <div class="group relative text-timberwolf">
-            <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75">
+            <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
                 <a href="{{ route('songs.showid', { id: song.id }) }}">
-                    <img src="{{ song.coverPath }}" alt="cover image" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                    <img src="{{ song.coverPath }}" alt="cover image" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                 </a>
             </div>
             <div class="mt-4 flex justify-between">
@@ -18,7 +18,7 @@
                     </h3>
                     <p class="mt-1 text-sm text-gray-500"> {{ song.duration }} minutos </p>
                 </div>
-                <p class="text-sm font-medium text-gray-900">R${{ song.price }}</p>
+                <p class="text-sm font-medium text-gray-900">R$ {{ song.price }}</p>
             </div>
         </div>
         @end
@@ -32,7 +32,7 @@
             @if(songsJson.meta.currentPage < songsJson.meta.lastPage)
             <a href="{{ route('songs.index', { page: songsJson.meta.nextPageUrl }) }}">Próxima</a>
             @endif
-    </div>
+        </div>
     </center>
 </div>
 @end
