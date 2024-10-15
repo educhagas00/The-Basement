@@ -57,7 +57,6 @@ export default class SongsController {
 
     // cria uma música (redireciona para a tela de criação)
     async addTrack({ view }: HttpContext) {
-        console.log('addTrack method called')
         return view.render('pages/songs/addTrack')
     }
 
