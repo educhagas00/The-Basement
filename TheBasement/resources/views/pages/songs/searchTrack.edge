@@ -7,29 +7,13 @@
             @!input({
                 name: 'name',
                 type: 'text',
-                id: 'name'
+                id: 'name',
+                placeholder: 'Digite o nome da música'
             })
         </div>
         <div>
             @button({ type: 'submit' })
-                Buscar música por nome
-            @end
-        </div>
-    @endform
-    @form({ action: route('songs.search'), method: 'GET' })
-        <div>
-            <label for="name">
-                Id da música
-            </label>
-            @!input({
-                name: 'id',
-                type: 'text',
-                id: 'id'
-            })
-        </div>
-        <div>
-            @button({ type: 'submit' })
-                Buscar música por Id
+                Buscar música
             @end
         </div>
     @endform

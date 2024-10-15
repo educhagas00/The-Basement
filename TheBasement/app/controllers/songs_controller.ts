@@ -5,7 +5,7 @@ export default class SongsController {
     // lista todas as músicas
     async index({ view, request }: HttpContext) {
         const page = request.input('page', 1)
-        const limit = 15
+        const limit = 16
 
         const payload = request.only(['name'])
 
