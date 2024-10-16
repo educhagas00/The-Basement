@@ -53,7 +53,8 @@ export default class extends BaseSeeder {
         song.duration = parseFloat((songData.duration_ms / 60000).toFixed(2)) // Convertendo de milissegundos para segundos
         song.releaseDate = songData.album.release_date
         // song.genreId = 1 // Defina um valor padrão ou ajuste conforme necessário
-        // song.albumId = 1 // Defina um valor padrão ou ajuste conforme necessário
+        // define o albumId como o id do album do song
+        song.albumId = songData.album.id
 
         song.coverPath = songData.album.images[0].url
 

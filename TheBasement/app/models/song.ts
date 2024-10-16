@@ -2,8 +2,6 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Song extends BaseModel {
-  @column({ isPrimary: true })
-  declare id: number
 
   @column({ columnName: 'song_id' })
   declare songId: number
@@ -26,7 +24,7 @@ export default class Song extends BaseModel {
   @column({ columnName: 'cover_path' })
   declare coverPath: string
 
-  @column()
+  @column({ columnName: 'album_id' })
   declare albumId: string
 
   @column.dateTime({ autoCreate: true })

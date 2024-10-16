@@ -2,10 +2,8 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Album extends BaseModel {
-  @column({ isPrimary: true })
-  declare id: number
 
-  @column({ columnName: 'album_id', isPrimary: true })
+  @column({ columnName: 'album_id' })
   declare albumId: string
 
   @column()
