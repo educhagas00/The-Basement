@@ -13,12 +13,12 @@ export default class extends BaseSchema {
       table.float('duration').notNullable()
       table.timestamp('release_date').notNullable()
       // table.integer('genre_id').notNullable()
-      // table.integer('album_id').notNullable()
+      table.string('album_id').notNullable()
 
       table.primary(['id', 'song_id'])
 
       // table.foreign('genre_id').references('id').inTable('genres')
-      
+
       table.foreign('album_id').references('id').inTable('albums')
 
       table.string('cover_path').notNullable()

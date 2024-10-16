@@ -5,8 +5,8 @@ export default class Album extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @column({ columnName: 'album_id' })
-  declare albumId: number
+  @column({ columnName: 'album_id', isPrimary: true })
+  declare albumId: string
 
   @column()
   declare name: string
