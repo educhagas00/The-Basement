@@ -70,7 +70,8 @@
     "reflect-metadata": "^0.2.2",
     "spotify-api.js": "^9.2.5",
     "spotify-web-api-js": "^1.5.2",
-    "sqlite": "^5.1.1"
+    "sqlite": "^5.1.1",
+    "tailwind": "^4.0.0"
   },
   "hotHook": {
     "boundaries": [

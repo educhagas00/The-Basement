@@ -7,6 +7,7 @@
 |
 */
 
+import AlbumsController from '#controllers/albums_controller'
 import router from '@adonisjs/core/services/router'
 
 const UsersController = () => import('#controllers/users_controller')
@@ -75,6 +76,16 @@ router
 
         // cria uma música no banco de dados a partir da API do Spotify
         router.post('/', [SongsController, 'store']).as('store')
+
+
     })
     .prefix('songs')
     .as('songs')
+
+router
+    .group(() => {      
+        router.get('/:page?', [AlbumsController, 'indexAlbum']).as('index')
+        router.get('/show/:id?', [AlbumsController, 'albumId']).as('albumid')
+    })
+    .prefix('albums')
+    .as('albums')    

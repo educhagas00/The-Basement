@@ -4,15 +4,15 @@
             <div class="flex flex-col md:flex-row -mx-4 text-timberwolf">
                 <div class="md:flex-1 px-4">
                     <div class=" bg-gray-300 dark:bg-gray-700 mb-4">
-                        <img src="https://image.tmdb.org/t/p/original{{ movie.posterPath }}" alt="cover image" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                        <img src="{{ album.coverPath }}" alt="cover image" alt="album cover" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
                 </div>
                 <div class="md:flex-1 px-4 text-lg">
-                    <h1 class="text-6xl font-bold text-gray-800 dark:text-white mb-2"> {{ movie.title }} </h1>
+                    <h1 class="text-6xl font-bold text-gray-800 dark:text-white mb-2"> {{ album.name }} </h1>
                     <div class="flex mb-4 pt-6">
                         <div class="mr-4">
                             <span class="font-bold text-gray-700 dark:text-gray-300">Preço:</span>
-                            <span class="text-gray-600 dark:text-gray-300">R$ {{ movie.price }}</span>
+                            <span class="text-gray-600 dark:text-gray-300">R$ {{ album.price }}</span>
                         </div>
                         <div>
                             <span class="font-bold text-gray-700 dark:text-gray-300">Disponibilidade:</span>
@@ -20,17 +20,13 @@
                         </div>
                     </div>
                     <div class="mb-4 pt-6">
-                        <span class="font-bold">Descrição:</span>
-                        <div class="flex items-center mt-2">
-                            <span class="text-gray-600 dark:text-gray-300">{{ movie.description }}</span>
-                        </div>
                         <span class="font-bold text-gray-700 dark:text-gray-300">Duração:</span>
                         <div class="flex items-center mt-2">
-                            <span class="text-gray-600 dark:text-gray-300">{{ movie.runtime }} minutos</span>
+                            <span class="text-gray-600 dark:text-gray-300">X minutos</span>
                         </div>
                         <span class="font-bold text-gray-700 dark:text-gray-300">Data de Lançamento:</span>
                         <div class="flex items-center mt-2">
-                            <span class="text-gray-600 dark:text-gray-300">{{ movie.releaseDate }}</span>
+                            <span class="text-gray-600 dark:text-gray-300">{{ album.releaseDate }}</span>
                         </div>
                     </div>
                     <div>

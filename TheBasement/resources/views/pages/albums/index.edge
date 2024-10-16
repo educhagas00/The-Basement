@@ -1,0 +1,37 @@
+@layouts.app()
+<div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 bg-rich-black">
+    <h2 class="text-2xl font-bold tracking-tight text-timberwolf">Álbuns</h2>
+
+    <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 bg-rich-black">
+        @each(album in albums)
+        <div class="group relative text-timberwolf">
+            <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
+                <a href="{{ route('albums.albumid', { id: album.id }) }}">
+                    <img src="{{ album.coverPath }}" alt="cover image" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                </a>
+            </div>
+            <div class="mt-4 flex justify-between">
+                <div>
+                    <a href="{{ route('albums.albumid', { id: album.id }) }}" class="nav-link">
+                        {{ album.name }}
+                    </a>
+                    </h3>
+                </div>
+                <p class="text-sm font-medium text-gray-900">R$ {{ album.price }}</p>
+            </div>
+        </div>
+        @endeach
+    </div>
+    <br>
+    <center>
+        <div class="text-rose">
+            @if(albumsJson.meta.currentPage > albumsJson.meta.firstPage)
+            <a href="{{ route('albums.index', { page: albumsJson.meta.previousPageUrl }) }}">Anterior</a>
+            @endif
+            @if(albumsJson.meta.currentPage < albumsJson.meta.lastPage)
+            <a href="{{ route('albums.index', { page: albumsJson.meta.nextPageUrl }) }}">Próxima</a>
+            @endif
+        </div>
+    </center>
+</div>
+@end

@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Song from '#models/song'
+import Album from '#models/album'
 
 export default class SongsController {
     // lista todas as músicas
@@ -57,7 +58,6 @@ export default class SongsController {
 
     // cria uma música (redireciona para a tela de criação)
     async addTrack({ view }: HttpContext) {
-        console.log('addTrack method called')
         return view.render('pages/songs/addTrack')
     }
 
@@ -96,4 +96,7 @@ export default class SongsController {
         // renderiza a view Songs.show com o Song encontrado
         return view.render('pages/songs/show', { song })
     }
+
+    // fazer em outro controller?
+    // mostrar página de álbu
 }
