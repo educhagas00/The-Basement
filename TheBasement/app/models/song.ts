@@ -23,11 +23,11 @@ export default class Song extends BaseModel {
   // @column({ columnName: 'genre_id' })
   // declare genreId: number
 
-  // @column()
-  // declare albumId: number
-
   @column({ columnName: 'cover_path' })
   declare coverPath: string
+
+  @column()
+  declare albumId: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
