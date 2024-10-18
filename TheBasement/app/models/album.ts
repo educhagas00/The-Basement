@@ -2,11 +2,9 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Album extends BaseModel {
-  @column({ isPrimary: true })
-  declare id: number
 
   @column({ columnName: 'album_id' })
-  declare albumId: number
+  declare albumId: string
 
   @column()
   declare name: string
@@ -14,8 +12,8 @@ export default class Album extends BaseModel {
   @column()
   declare price: number
 
-  // @column()
-  // declare duration: number
+  @column()
+  declare duration: number
 
   @column({ columnName: 'release_date' })
   declare releaseDate: DateTime

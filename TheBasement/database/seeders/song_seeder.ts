@@ -1,6 +1,7 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import Song from '#models/song'
 import dotenv from 'dotenv'
+import db from '@adonisjs/lucid/services/db'
 dotenv.config()
 
 export default class extends BaseSeeder {
@@ -12,7 +13,9 @@ export default class extends BaseSeeder {
       } // o token de acesso (lá no .env) dura 1 hora! fazer o curl pelo terminal para pegar o token
     };
 
-    const albumIds = ['2nLOHgzXzwFEpl62zAgCEC', '6YlDIxqEjvY63ffH6AwCjd', '5EbpxRwbbpCJUepbqVTZ1U', '3iPSVi54hsacKKl1xIR2eH', '2ANVost0y2y52ema1E9xAZ', '3cN3mENkACWuRCDOuQUtfw']
+    // realiza consulta na tabela de álbuns e armazena os ids dos álbuns em um array
+    const albumIds: any[] = (await db.from('albums').select('album_id')).map((album: any) => album.album_id)
+    // console.log(albumIds)
 
     const songIds = []
 
@@ -33,6 +36,8 @@ export default class extends BaseSeeder {
         console.error(`Error fetching album with ID ${albumId}:`, error)
       }
     }
+
+    console.log(songIds)
     
     for (const songId of songIds) {
       try {
@@ -49,13 +54,10 @@ export default class extends BaseSeeder {
         const song = new Song()
         song.songId = songData.id
         song.name = songData.name
-        song.price = parseFloat((50 + Math.random() * 50).toFixed(2)) // numero aleatorio de 50 a 100 com 2 casas decimais
         song.duration = parseFloat((songData.duration_ms / 60000).toFixed(2)) // Convertendo de milissegundos para segundos
-        song.releaseDate = songData.album.release_date
         // song.genreId = 1 // Defina um valor padrão ou ajuste conforme necessário
-        // song.albumId = 1 // Defina um valor padrão ou ajuste conforme necessário
-
-        song.coverPath = songData.album.images[0].url
+        // define o albumId como o id do album do song
+        song.albumId = songData.album.id
 
         await song.save()
       }

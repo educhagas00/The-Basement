@@ -84,8 +84,8 @@ router
 
 router
     .group(() => {      
+        router.get('/show/albumId/:albumId?', [AlbumsController, 'albumId']).as('albumid')
         router.get('/:page?', [AlbumsController, 'indexAlbum']).as('index')
-        router.get('/show/:id?', [AlbumsController, 'albumId']).as('albumid')
     })
     .prefix('albums')
     .as('albums')    
