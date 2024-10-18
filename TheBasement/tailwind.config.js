@@ -14,6 +14,7 @@ export default {
       'rose': {
         DEFAULT: '#f91880',
         dark: '#de1170',
+        light: '#ff87bf',
       },
       'dark-violet': {
         DEFAULT: '#a71aC3',
@@ -23,6 +24,7 @@ export default {
       },
       'timberwolf': {
         DEFAULT: '#d6d3d1',
+        dark: '#7a777b',
       },
       'blue-sky': {
         DEFAULT: '#23dafe',
@@ -32,6 +34,9 @@ export default {
       },
       'pumpkin': {
         DEFAULT: '#ff6600',
+      },
+      'dark-purple': {
+        DEFAULT: '#231628',
       },
     },
     extend: {},
