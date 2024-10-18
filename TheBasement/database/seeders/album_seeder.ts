@@ -36,7 +36,7 @@ export default class extends BaseSeeder {
         albumData.tracks.items.forEach((track: any) => {
           duration += track.duration_ms
         })
-        album.duration = duration / 60000 // duration em minutos
+        album.duration = parseFloat((duration / 60000).toFixed(2)) // duration em minutos
         album.releaseDate = albumData.release_date
 
         album.coverPath = albumData.images[0].url

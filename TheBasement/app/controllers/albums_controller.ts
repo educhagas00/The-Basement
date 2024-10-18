@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Album from '#models/album'
+import db from '@adonisjs/lucid/services/db'
 
 export default class AlbumsController {
 
@@ -27,9 +28,15 @@ export default class AlbumsController {
 
     async albumId({ view, params }: HttpContext) {
         // busca um Album pelo id ou retorna um erro 404 caso não encontre
-        const album = await Album.findOrFail(params.id)
+        const album = await db.from('albums').where('album_id', params.albumId).first()
+        if (!album) {
+            return view.render('pages/errors/404')
+        }
+
+        // busca as músicas do Album
+        const songs = await db.from('songs').join('albums', 'songs.album_id', 'albums.album_id').where('albums.album_id', params.albumId).select('songs.*')
 
         // renderiza a view com o Album encontrado
-        return view.render('pages/albums/showAlbum', { album })
+        return view.render('pages/albums/showAlbum', { album, songs })
     }
 }
