@@ -9,3 +9,7 @@
 .text-custom {
     background: #eee9e9;
 }
+
+::selection {
+    color: #161b22;
+}
