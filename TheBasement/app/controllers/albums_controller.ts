@@ -39,4 +39,15 @@ export default class AlbumsController {
         // renderiza a view com o Album encontrado
         return view.render('pages/albums/showAlbum', { album, songs })
     }
+
+    async searchAlbum({ view, request }: HttpContext) {
+        const payload = request.only(['name'])
+        
+        // busca os álbuns com paginação
+        const albums = await db.query().from('albums').where('name', 'like', `%${payload.name}%`)
+        const albumsJson = albums.toJSON()
+
+        // return songsJson
+        return view.render('pages/albums/searchAlbum', { albums, albumsJson })
+    }
 }

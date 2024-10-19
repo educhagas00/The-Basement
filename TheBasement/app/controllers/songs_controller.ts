@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Song from '#models/song'
+import db from '@adonisjs/lucid/services/db'
 
 export default class SongsController {
     // lista todas as músicas
@@ -45,13 +46,11 @@ export default class SongsController {
         const song = new Song()
         song.songId = songData.id
         song.name = songData.name
-        song.price = parseFloat((50 + Math.random() * 50).toFixed(2)) // numero aleatorio de 50 a 100 com 2 casas decimais
         song.duration = parseFloat((songData.duration_ms / 60000).toFixed(2)) // Convertendo de milissegundos para segundos
-        song.releaseDate = songData.album.release_date
 
         await song.save()
 
-        // retorna o produto criado
+        // retorna o produto criado. mudar depois para adicionar um álbum e não música.
         return response.redirect().toRoute('songs.showid', { id: song.id })
     }
 
@@ -61,6 +60,9 @@ export default class SongsController {
     }
 
     async searchTrack({ view, request }: HttpContext) {
+        const page = request.input('page', 1)
+        const limit = 16
+        
         const name = request.input('name', 'null')
         const id = request.input('id', 'null')
         
@@ -76,7 +78,11 @@ export default class SongsController {
             songs  = await query.where('song_id', 'like', `%${id}%`)
         }
 
-        return view.render('pages/songs/searchTrack', { songs })
+        songs = await query.paginate(page, limit)
+
+        const coverPath = await db.from('albums').join('songs', 'albums.album_id', 'songs.album_id').select('albums.cover_path').where('songs.song_id', songs[0].songId).first()
+
+        return view.render('pages/songs/searchTrack', { songs, coverPath })
     }
 
     // async showTrackByName({ view, params }: HttpContext) {
