@@ -84,9 +84,9 @@
                 <div class="top-0 left-0 items-start hidden self-center w-full h-full p-4 text-sm bg-gray-900 bg-opacity-50 md:items-center md:w-3/4 lg:text-base md:bg-transparent md:p-0 md:relative md:flex"
                     :class="{'flex fixed': showMenu, 'hidden': !showMenu }">
                     <div
-                        class="flex-col w-full h-auto overflow-hidden bg-white rounded-lg md:bg-transparent md:overflow-visible md:rounded-none md:relative md:flex md:flex-row">
+                        class="flex-col w-full h-auto overflow-hidden rounded-lg md:bg-transparent md:overflow-visible md:rounded-none md:relative md:flex md:flex-row">
                         <div
-                            class="  flex flex-col items-start justify-center w-2/3 space-x-6 text-center lg:space-x-8 md:w-2/3 md:mt-0 md:flex-row md:items-center">
+                            class="flex items-start justify-end mr-14 w-2/3 space-x-6 text-center lg:space-x-8 md:w-2/3 md:mt-0 md:flex-row md:items-center">
                             <a href="{{ route('albums.index') }}" class="text-timberwolf hover:text-opacity-80">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="3em" height="3em" viewBox="0 0 256 256">
                                     <g fill="white">
@@ -98,14 +98,12 @@
                                     </g>
                                 </svg>
                             </a>
-                            <a href="{{ route('songs.addtrack') }}"
-                                class="text-timberwolf hover:text-opacity-80">Adicionar Música</a>
                         </div>
 
                         <div class="flex items-center justify-center w-full h-full">
                             {{-- search bar --}}
                             <!-- component -->
-                            <form action="{{ route('songs.search') }}" class="max-w-md mx-auto w-full">
+                            <form action="{{ route('albums.search') }}" class="max-w-md mx-auto w-full">
                                 <label for="default-search"
                                     class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                                 <div class="relative w-full">
@@ -128,9 +126,7 @@
                         </div>
 
                         <div
-                            class="  flex flex-col items-start justify-center w-2/3 space-x-6 text-center lg:space-x-8 md:mt-0 md:flex-row md:items-center">
-                            <a href="{{ route('songs.search') }}" class="text-timberwolf hover:text-opacity-80">Buscar
-                                Música</a>
+                            class="flex-col items-center content-center justify-left ml-14 w-2/3 space-x-6 text-center lg:space-x-8 md:mt-0 md:flex-row md:items-center">
                             <a href="{{ route('movies.index') }}" class="text-timberwolf hover:text-opacity-80">
                                 <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.5em" height="2.6em"
                                     viewBox="0 0 512 512" xml:space="preserve" fill="#ffffff">
@@ -155,7 +151,7 @@
                     </div>
                 </div>
                 {{-- botão de admin --}}
-                <div>
+                <div class="ml-20">
                     <div class="relative" x-data="{ showAdminMenu: false }">
                         {{-- Botão "Admin" que abre/fecha o menu --}}
                         <button @click="showAdminMenu = !showAdminMenu" type="button"
