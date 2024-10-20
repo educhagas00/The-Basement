@@ -68,9 +68,14 @@ export default class AlbumsController {
             }
         }
 
-        const payload = request.only(['albumId'])
+        const url = request.input('albumId')
 
-        const res = await fetch(`https://api.spotify.com/v1/albums/${payload.albumId}`, options) 
+        const match = url.match(/album\/([a-zA-Z0-9]+)(\?|$)/)
+        const payload = match ? match[1] : null
+
+        //const payload = request.only(['albumId'])
+
+        const res = await fetch(`https://api.spotify.com/v1/albums/${payload}`, options) 
         
         const albumData: any = await res.json()
 
@@ -96,7 +101,7 @@ export default class AlbumsController {
 
         // agora é preciso puxar as músicas do álbum e salvar no banco de dados
 
-        const res_songs: any = await fetch(`https://api.spotify.com/v1/albums/${payload.albumId}/tracks`, options)
+        const res_songs: any = await fetch(`https://api.spotify.com/v1/albums/${payload}/tracks`, options)
 
         const songIds = []
 
