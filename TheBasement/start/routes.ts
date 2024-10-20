@@ -84,10 +84,13 @@ router
 
 router
     .group(() => {      
+        router.get('/addAlbum', [AlbumsController, 'addAlbum']).as('addalbum')
         router.get('/show/albumId/:albumId?', [AlbumsController, 'albumId']).as('albumid')
         router.get('/:page?', [AlbumsController, 'indexAlbum']).as('index')
 
         router.post('/search', [AlbumsController, 'searchAlbum']).as('search')
+
+        router.post('/', [AlbumsController, 'storeAlbum']).as('store')
     })
     .prefix('albums')
     .as('albums')    

@@ -1,0 +1,22 @@
+@layouts.app()
+<div class="flex flex-grow  flex-col min-h-screen">
+    @form({ action: route('albums.store') })
+    <div>
+        <label for="albumId">
+            Id do Album
+        </label>
+        @!input({
+        name: 'albumId',
+        type: 'text',
+        id: 'albumId'
+        })
+    </div>
+    <div>
+        @button({ type: 'submit' })
+        Criar Album
+        @end
+    </div>
+    @end
+</div>
+
+@end
