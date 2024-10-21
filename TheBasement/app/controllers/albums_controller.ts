@@ -73,8 +73,6 @@ export default class AlbumsController {
         const match = url.match(/album\/([a-zA-Z0-9]+)(\?|$)/)
         const payload = match ? match[1] : null
 
-        //const payload = request.only(['albumId'])
-
         const res = await fetch(`https://api.spotify.com/v1/albums/${payload}`, options) 
         
         const albumData: any = await res.json()
@@ -139,6 +137,40 @@ export default class AlbumsController {
 
     async addAlbum({ view }: HttpContext) {
         return view.render('pages/albums/addAlbum')
+    }
+
+    async update({ params, request, response }: HttpContext) {
+        // const album = await Album.findOrFail(params.albumId)
+
+        // const payload = request.only(['name', 'price', 'duration'])
+
+        // album.merge(payload)
+
+        // pegando cada input do formulário com seus respectivos nomes
+        const albumId = request.input('albumSelect')
+        const newName = request.input('albumName')
+        const newPrice = request.input('albumPrice')
+        const newDuration = request.input('albumDuration')
+
+        const album = await Album.findOrFail(albumId)
+
+        if (newName) {
+            album.name = newName
+        }
+        if (newPrice) {
+            album.price = parseFloat(newPrice)
+        }
+        if (newDuration) {
+            album.duration = parseFloat(newDuration)
+        }
+
+        album.save()
+
+        return response.redirect().toRoute('albums.albumid', { albumId: album.albumId })
+    }
+
+    async updateAlbum({ view }: HttpContext) { 
+        return view.render('pages/albums/updateAlbum')
     }
 
 }
