@@ -1,7 +1,7 @@
-@layouts.app()
 
+@layouts.app()
 <div class="flex flex-col w-full max-w-md text-timberwolf">
-    @form({ action: route('albums.update'), method: 'PATCH' })
+    @form({ action: route('albums.update'), method: 'POST' })
         <div class="mb-4">
             <label for="albumSelect" class="block text-sm font-medium text-gray-300">
                 Informe o Álbum que deseja alterar
@@ -11,41 +11,41 @@
                 type: 'text',
                 id: 'albumId',
                 placeholder: 'Insira o ID do Álbum',
-                class: 'mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                class: 'mt-1 block w-full px-3 py-2 bg-rich-black border border-gold rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-rich-black-dark focus:border-gold sm:text-sm'
             })
         </div>
         <div class="mb-4">
-            <label for="albumName" class="block text-sm font-medium text-gray-300">
+            <label for="name" class="block text-sm font-medium text-gray-300">
                 Novo Nome do Álbum (opcional)
             </label>
             @!input({
-                name: 'albumName',
+                name: 'name',
                 type: 'text',
-                id: 'albumName',
+                id: 'name',
                 placeholder: 'Insira o novo nome do álbum',
                 class: 'mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
             })
         </div>
         <div class="mb-4">
-            <label for="albumPrice" class="block text-sm font-medium text-gray-300">
+            <label for="price" class="block text-sm font-medium text-gray-300">
                 Novo Preço do Álbum (opcional)
             </label>
             @!input({
-                name: 'albumPrice',
+                name: 'price',
                 type: 'number',
-                id: 'albumPrice',
+                id: 'price',
                 placeholder: 'Insira o novo preço do álbum',
                 class: 'mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
             })
         </div>
         <div class="mb-4">
-            <label for="albumDuration" class="block text-sm font-medium text-gray-300">
+            <label for="duration" class="block text-sm font-medium text-gray-300">
                 Nova Duração do Álbum (opcional)
             </label>
             @!input({
-                name: 'albumDuration',
+                name: 'duration',
                 type: 'number',
-                id: 'albumDuration',
+                id: 'duration',
                 placeholder: 'Insira a nova duração do álbum (em minutos)',
                 class: 'mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
             })
@@ -57,5 +57,4 @@
         </div>
     @end
 </div>
-
 @end

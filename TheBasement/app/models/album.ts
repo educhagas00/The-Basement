@@ -3,7 +3,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Album extends BaseModel {
 
-  @column({ columnName: 'album_id' })
+  @column({ isPrimary: true, columnName: 'album_id' })
   declare albumId: string
 
   @column()

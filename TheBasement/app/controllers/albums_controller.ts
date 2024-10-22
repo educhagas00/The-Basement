@@ -47,14 +47,25 @@ export default class AlbumsController {
     }
 
     async searchAlbum({ view, request }: HttpContext) {
+        const page = request.input('page', 1)
+        const limit = 16
+
         const payload = request.only(['name'])
         
         // busca os álbuns com paginação
-        const albums = await db.query().from('albums').where('name', 'like', `%${payload.name}%`)
+        const query = Album.query()
+
+        if (payload.name && payload.name.length > 0) {
+            query.where('name', 'like', `%${payload.name}%`)
+        }
+
+        //await query.where('name', 'like', `%${payload.name}%`)
+
+        const albums = await query.paginate(page, limit)
         const albumsJson = albums.toJSON()
 
         // return songsJson
-        return view.render('pages/albums/searchAlbum', { albums, albumsJson })
+        return view.render('pages/albums/searchAlbum', { albums , albumsJson })
     }
 
     // cria álbum no banco de dados a partir da API do Spotify
@@ -139,32 +150,27 @@ export default class AlbumsController {
         return view.render('pages/albums/addAlbum')
     }
 
-    async update({ params, request, response }: HttpContext) {
-        // const album = await Album.findOrFail(params.albumId)
+    async update({ view, request, response }: HttpContext) {
 
-        // const payload = request.only(['name', 'price', 'duration'])
+        const album = await Album.findOrFail(request.input('albumId'))
 
-        // album.merge(payload)
+        const data = request.only(['name', 'price', 'duration'])
 
-        // pegando cada input do formulário com seus respectivos nomes
-        const albumId = request.input('albumSelect')
-        const newName = request.input('albumName')
-        const newPrice = request.input('albumPrice')
-        const newDuration = request.input('albumDuration')
-
-        const album = await Album.findOrFail(albumId)
-
-        if (newName) {
-            album.name = newName
-        }
-        if (newPrice) {
-            album.price = parseFloat(newPrice)
-        }
-        if (newDuration) {
-            album.duration = parseFloat(newDuration)
+        if (!album) {
+            return view.render('pages/errors/404')
         }
 
-        album.save()
+        if(data.name) {
+            album.name = data.name
+        }
+        if(data.price) {
+            album.price = data.price
+        }
+        if(data.duration) {
+            album.duration = data.duration
+        }
+
+        await album.save()
 
         return response.redirect().toRoute('albums.albumid', { albumId: album.albumId })
     }
