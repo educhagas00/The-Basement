@@ -54,11 +54,13 @@ router
     .group(() => {
         router.get('/addMovie', [MoviesController, 'addMovie']).as('addmovie')
         router.get('/updateMovie', [MoviesController, 'updateMovie']).as('updatemovie')
+        router.get('/deleteMovie', [MoviesController, 'deleteMovie']).as('deletemovie')
 
         router.get('/:page?', [MoviesController, 'index']).as('index')
         router.get('/show/movieId/:movieId?', [MoviesController, 'movieId']).as('movieid')
 
         router.post('/update', [MoviesController, 'update']).as('update')
+        router.post('/delete', [MoviesController, 'destroy']).as('destroy')
         router.post('/', [MoviesController, 'storeMovie']).as('store')
     })
     .prefix('movies')

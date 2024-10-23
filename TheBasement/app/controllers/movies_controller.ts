@@ -105,4 +105,21 @@ export default class MoviesController {
     return view.render('pages/movies/updateMovie')
   }
 
+  async destroy({view, request, response}:HttpContext) {
+      
+      const movie = await Movie.findOrFail(request.input('movieId'))
+  
+      if (!movie) {
+          return view.render('pages/errors/404')
+      }
+  
+      await movie.delete()
+
+      return response.redirect().toRoute('movies.index')
+  } 
+
+  async deleteMovie({ view }: HttpContext) { 
+    return view.render('pages/movies/deleteMovie')
+  }
+
 }
