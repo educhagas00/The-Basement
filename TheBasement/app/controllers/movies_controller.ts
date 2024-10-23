@@ -7,7 +7,7 @@ export default class MoviesController {
   async index( { view, request }: HttpContext ) { 
       
     const page = request.input('page', 1)
-    const limit = 5
+    const limit = 12
 
     const payload = request.only(['title'])
 
