@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Movie from "#models/movie";
+import db from '@adonisjs/lucid/services/db';
 
 export default class MoviesController {
 
@@ -25,11 +26,54 @@ export default class MoviesController {
 
   }
 
-  async show({ view, params }: HttpContext) {
-    // busca um Song pelo id ou retorna um erro 404 caso não encontre
-    const movie = await Movie.findOrFail(params.id)
+  async movieId({ view, params }: HttpContext) {
 
-    // renderiza a view Songs.show com o Song encontrado
-    return view.render('pages/movies/show', { movie })
+    const movie = await db.from('movies').where('movies.movie_id', params.movieId).first()
+
+    if (!movie) {
+      return view.render('pages/errors/404')
+    }
+
+    // renderiza a view Movies.show com o Filme encontrado
+    return view.render('pages/movies/showMovie', { movie })
   }
+
+  async storeMovie({ request, response }: HttpContext) { 
+
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNDM2ZDBlOTliYzMzYWU0NTlhYmNlMjdhZWJhOTNiNiIsIm5iZiI6MTcyODI0MjU5MC4xOTc2MDksInN1YiI6IjY2ZmRkMzljOWViZWExOTAwNmY3YjY0OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gU0cLBQnxLCb5dyfWjyyqaWXCldtcxIUUTsWmTjWwto'
+      }
+    };
+    
+    const payload = request.input('movieId')
+
+    const res = await fetch(`https://api.themoviedb.org/3/movie/${payload}?language=en-US`, options)
+
+    const movieData:any = await res.json()
+
+    const movie = new Movie()
+
+    movie.movieId = movieData.id
+    movie.title = movieData.title
+    movie.description = movieData.overview
+    const price = parseFloat((50 + Math.random() * 50).toFixed(2)) 
+    movie.price = parseFloat(price.toFixed(2))
+    movie.budget = movieData.budget
+    movie.revenue = movieData.revenue
+    movie.runtime = movieData.runtime
+    movie.releaseDate = movieData.release_date
+    movie.posterPath = movieData.poster_path
+
+    await movie.save()
+
+    return response.redirect().toRoute('movies.movieid', { movieId: movie.movieId })
+  }
+
+  async addMovie({ view }: HttpContext) { 
+    return view.render('pages/movies/addMovie')
+  }
+
 }
