@@ -179,4 +179,21 @@ export default class AlbumsController {
         return view.render('pages/albums/updateAlbum')
     }
 
+    async destroy({view, request, response }: HttpContext) { 
+
+        const album = await Album.findOrFail(request.input('albumId'))
+
+        if (!album) {
+            return view.render('pages/errors/404')
+        }
+
+        await album.delete()
+
+        return response.redirect().toRoute('albums.index')
+    }
+
+    async deleteAlbum({ view }: HttpContext) { 
+        return view.render('pages/albums/deleteAlbum')
+    }
+
 }

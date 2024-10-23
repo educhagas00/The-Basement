@@ -86,12 +86,15 @@ router
     .group(() => {      
         router.get('/addAlbum', [AlbumsController, 'addAlbum']).as('addalbum')
         router.get('/updateAlbum', [AlbumsController, 'updateAlbum']).as('updatealbum')
+        router.get('/deleteAlbum', [AlbumsController, 'deleteAlbum']).as('deletealbum')
+
         router.get('/search/:page?', [AlbumsController, 'searchAlbum']).as('search')
 
         router.get('/show/albumId/:albumId?', [AlbumsController, 'albumId']).as('albumid')
         router.get('/:page?', [AlbumsController, 'indexAlbum']).as('index')
 
         router.post('/update', [AlbumsController, 'update']).as('update')
+        router.post('/delete', [AlbumsController, 'destroy']).as('destroy')
         router.post('/', [AlbumsController, 'storeAlbum']).as('store')
     })
     .prefix('albums')
