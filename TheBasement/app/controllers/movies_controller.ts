@@ -76,4 +76,33 @@ export default class MoviesController {
     return view.render('pages/movies/addMovie')
   }
 
+  async update({view, request, response}: HttpContext) {
+
+    const movie = await Movie.findOrFail(request.input('movieId'))
+
+    const data = request.only(['title', 'price', 'runtime', 'description'])
+
+    if (!movie) {
+        return view.render('pages/errors/404')
+    }
+
+    if(data.title) {
+        movie.title = data.title
+    }
+    if(data.price) {
+        movie.price = data.price
+    }
+    if(data.runtime) {
+        movie.runtime = data.runtime
+    }
+
+    await movie.save()
+
+    return response.redirect().toRoute('movies.movieid', { movieId: movie.movieId })
+  }
+
+  async updateMovie({ view }: HttpContext) { 
+    return view.render('pages/movies/updateMovie')
+  }
+
 }

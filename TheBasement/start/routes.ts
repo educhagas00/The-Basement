@@ -53,10 +53,12 @@ router
 router
     .group(() => {
         router.get('/addMovie', [MoviesController, 'addMovie']).as('addmovie')
+        router.get('/updateMovie', [MoviesController, 'updateMovie']).as('updatemovie')
 
         router.get('/:page?', [MoviesController, 'index']).as('index')
         router.get('/show/movieId/:movieId?', [MoviesController, 'movieId']).as('movieid')
 
+        router.post('/update', [MoviesController, 'update']).as('update')
         router.post('/', [MoviesController, 'storeMovie']).as('store')
     })
     .prefix('movies')
@@ -88,6 +90,7 @@ router
 
 router
     .group(() => {      
+        //renderiza telas
         router.get('/addAlbum', [AlbumsController, 'addAlbum']).as('addalbum')
         router.get('/updateAlbum', [AlbumsController, 'updateAlbum']).as('updatealbum')
         router.get('/deleteAlbum', [AlbumsController, 'deleteAlbum']).as('deletealbum')
@@ -97,6 +100,7 @@ router
         router.get('/show/albumId/:albumId?', [AlbumsController, 'albumId']).as('albumid')
         router.get('/:page?', [AlbumsController, 'indexAlbum']).as('index')
 
+        // logica
         router.post('/update', [AlbumsController, 'update']).as('update')
         router.post('/delete', [AlbumsController, 'destroy']).as('destroy')
         router.post('/', [AlbumsController, 'storeAlbum']).as('store')
