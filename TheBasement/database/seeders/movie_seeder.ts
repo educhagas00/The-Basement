@@ -14,17 +14,21 @@ export default class extends BaseSeeder {
       }
     };
     
-    const movieIds = [693134, 414906, 339403, 680, 11, 24428, 9502, 24, 694, 238, 557, 244786]
+    const movieIds = [693134,769, 414906, 339403 ,578, 9377, 680, 550,  274,  426,  27205,  105, 603 ,103, 185 ,  85,  149,  600,
+       324857 ,  106646,  16869,  313369,  350, 77 ,98 ,11, 24428, 9502, 24, 694, 238, 115,557, 244786]
 
 
     for(const movieId of movieIds) {
-      const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR-US`, options)
+      const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`, options)
       const movieData:any = await response.json()
 
       const movie = new Movie()
       movie.movieId = movieData.id
       movie.title = movieData.title
-      movie.description = movieData.overview
+      const description = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR-US`, options)
+      const descriptionData:any = await description.json()
+
+      movie.description = descriptionData.overview
 
       const price = parseFloat((50 + Math.random() * 50).toFixed(2)) // numero aleatorio entre 50 e 100
       movie.price = parseFloat(price.toFixed(2))

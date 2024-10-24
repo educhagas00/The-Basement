@@ -2,10 +2,8 @@ import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 
 export default class Movie extends BaseModel {
-  @column({ isPrimary: true })
-  declare id: number
 
-  @column({ columnName: 'movie_id' })
+  @column({ isPrimary: true, columnName: 'movie_id' })
   declare movieId: number
 
   @column()

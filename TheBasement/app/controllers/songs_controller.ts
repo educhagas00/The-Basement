@@ -51,7 +51,7 @@ export default class SongsController {
         await song.save()
 
         // retorna o produto criado. mudar depois para adicionar um álbum e não música.
-        return response.redirect().toRoute('songs.showid', { id: song.id })
+        return response.redirect().toRoute('songs.showid', { id: song.songId })
     }
 
     // cria uma música (redireciona para a tela de criação)

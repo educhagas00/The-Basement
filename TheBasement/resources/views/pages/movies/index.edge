@@ -6,14 +6,14 @@
         @each(movie in movies)
         <div class="group relative text-timberwolf">
             <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75">
-                <a href="{{ route('movies.show', { id: movie.id }) }}">
-                    <img src="https://image.tmdb.org/t/p/original{{ movie.posterPath }}" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+                <a href="{{ route('movies.movieid', { movieId: movie.movieId }) }}">
+                    <img src="https://image.tmdb.org/t/p/original{{ movie.posterPath }}" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                 </a>
             </div>
             <div class="mt-4 flex justify-between">
                 <div>
-                    <a href="{{ route('movies.show', { id: movie.id }) }}" class="nav-link">
-                        {{movie.title}}
+                    <a href="{{ route('movies.movieid', { movieId: movie.movieId }) }}" class="nav-link">
+                        {{ movie.title }}
                     </a>
                     <p class="mt-1 text-sm text-gray-500"> {{ movie.runtime }} minutos </p>
                 </div>

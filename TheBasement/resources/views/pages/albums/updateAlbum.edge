@@ -1,0 +1,61 @@
+@layouts.app()
+<div class="min-h-screen flex items-center justify-center">
+    <div class="flex flex-col  w-full max-w-md justify-center text-timberwolf">
+        @form({ action: route('albums.update')+'?_method=PATCH', method: 'POST' })
+            <div class="mb-4">
+                <label for="albumSelect" class="block text-sm font-bold">
+                    Informe o Álbum que deseja alterar
+                </label>
+                @!input({
+                    name: 'albumId',
+                    type: 'text',
+                    id: 'albumId',
+                    placeholder: 'Insira o ID do Álbum',
+                    class: ''
+                })
+            </div>
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-bold text-gray-300">
+                    Novo Nome do Álbum (opcional)
+                </label>
+                @!input({
+                    name: 'name',
+                    type: 'text',
+                    id: 'name',
+                    placeholder: 'Insira o novo nome do álbum',
+                    class: ''
+                })
+            </div>
+            <div class="mb-4">
+                <label for="price" class="block text-sm font-bold text-gray-300">
+                    Novo Preço do Álbum (opcional)
+                </label>
+                @!input({
+                    name: 'price',
+                    type: 'number',
+                    id: 'price',
+                    placeholder: 'Insira o novo preço do álbum',
+                    class: ''
+                })
+            </div>
+            <div class="mb-4">
+                <label for="duration" class="block text-sm font-bold text-gray-300">
+                    Nova Duração do Álbum (opcional)
+                </label>
+                @!input({
+                    name: 'duration',
+                    type: 'number',
+                    id: 'duration',
+                    placeholder: 'Insira a nova duração do álbum (em minutos)',
+                    class: ''
+                })
+            </div>
+            <div class="flex justify-center">
+                @button({ type: 'submit' })
+                Alterar Álbum
+                @end
+            </div>
+        @end
+    </div>
+</div>
+@end

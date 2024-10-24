@@ -52,8 +52,16 @@ router
 
 router
     .group(() => {
+        router.get('/addMovie', [MoviesController, 'addMovie']).as('addmovie')
+        router.get('/updateMovie', [MoviesController, 'updateMovie']).as('updatemovie')
+        router.get('/deleteMovie', [MoviesController, 'deleteMovie']).as('deletemovie')
+
         router.get('/:page?', [MoviesController, 'index']).as('index')
-        router.get('/findbyid/:id', [MoviesController, 'show']).as('show')
+        router.get('/show/movieId/:movieId?', [MoviesController, 'movieId']).as('movieid')
+
+        router.patch('/update', [MoviesController, 'update']).as('update')
+        router.delete('/delete', [MoviesController, 'destroy']).as('destroy')
+        router.post('/', [MoviesController, 'storeMovie']).as('store')
     })
     .prefix('movies')
     .as('movies')
@@ -84,10 +92,20 @@ router
 
 router
     .group(() => {      
+        //renderiza telas
+        router.get('/addAlbum', [AlbumsController, 'addAlbum']).as('addalbum')
+        router.get('/updateAlbum', [AlbumsController, 'updateAlbum']).as('updatealbum')
+        router.get('/deleteAlbum', [AlbumsController, 'deleteAlbum']).as('deletealbum')
+
+        router.get('/search/:page?', [AlbumsController, 'searchAlbum']).as('search')
+
         router.get('/show/albumId/:albumId?', [AlbumsController, 'albumId']).as('albumid')
         router.get('/:page?', [AlbumsController, 'indexAlbum']).as('index')
 
-        router.post('/search', [AlbumsController, 'searchAlbum']).as('search')
+        // logica
+        router.patch('/update', [AlbumsController, 'update']).as('update')
+        router.delete('/delete', [AlbumsController, 'destroy']).as('destroy')
+        router.post('/', [AlbumsController, 'storeAlbum']).as('store')
     })
     .prefix('albums')
     .as('albums')    

@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Movie from "#models/movie";
+import db from '@adonisjs/lucid/services/db';
 
 export default class MoviesController {
 
@@ -7,7 +8,7 @@ export default class MoviesController {
   async index( { view, request }: HttpContext ) { 
       
     const page = request.input('page', 1)
-    const limit = 5
+    const limit = 12
 
     const payload = request.only(['title'])
 
@@ -25,11 +26,103 @@ export default class MoviesController {
 
   }
 
-  async show({ view, params }: HttpContext) {
-    // busca um Song pelo id ou retorna um erro 404 caso não encontre
-    const movie = await Movie.findOrFail(params.id)
+  async movieId({ view, params }: HttpContext) {
 
-    // renderiza a view Songs.show com o Song encontrado
-    return view.render('pages/movies/show', { movie })
+    const movie = await db.from('movies').where('movies.movie_id', params.movieId).first()
+
+    if (!movie) {
+      return view.render('pages/errors/404')
+    }
+
+    // renderiza a view Movies.show com o Filme encontrado
+    return view.render('pages/movies/showMovie', { movie })
   }
+
+  async storeMovie({ request, response }: HttpContext) { 
+
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${process.env.TMDB_ACESS_TOKEN}`
+      }
+    };
+    
+    const payload = request.input('movieId')
+
+    const res = await fetch(`https://api.themoviedb.org/3/movie/${payload}?language=en-US`, options)
+
+    const movieData:any = await res.json()
+
+    const movie = new Movie()
+
+    movie.movieId = movieData.id
+    movie.title = movieData.title
+    movie.description = movieData.overview
+    const price = parseFloat((50 + Math.random() * 50).toFixed(2)) 
+    movie.price = parseFloat(price.toFixed(2))
+    movie.budget = movieData.budget
+    movie.revenue = movieData.revenue
+    movie.runtime = movieData.runtime
+    movie.releaseDate = movieData.release_date
+    movie.posterPath = movieData.poster_path
+
+    await movie.save()
+
+    return response.redirect().toRoute('movies.movieid', { movieId: movie.movieId })
+  }
+
+  async addMovie({ view }: HttpContext) { 
+    return view.render('pages/movies/addMovie')
+  }
+
+  async update({view, request, response}: HttpContext) {
+
+    const movie = await Movie.findOrFail(request.input('movieId'))
+
+    const data = request.only(['title', 'price', 'runtime', 'description'])
+
+    if (!movie) {
+        return view.render('pages/errors/404')
+    }
+
+    if(data.title) {
+        movie.title = data.title
+    }
+    if(data.price) {
+        movie.price = data.price
+    }
+    if(data.runtime) {
+        movie.runtime = data.runtime
+    }
+    if(data.description) {
+        movie.description = data.description
+    }    
+
+    await movie.save()
+
+    return response.redirect().toRoute('movies.movieid', { movieId: movie.movieId })
+  }
+
+  async updateMovie({ view }: HttpContext) { 
+    return view.render('pages/movies/updateMovie')
+  }
+
+  async destroy({view, request, response}:HttpContext) {
+      
+      const movie = await Movie.findOrFail(request.input('movieId'))
+  
+      if (!movie) {
+          return view.render('pages/errors/404')
+      }
+  
+      await movie.delete()
+
+      return response.redirect().toRoute('movies.index')
+  } 
+
+  async deleteMovie({ view }: HttpContext) { 
+    return view.render('pages/movies/deleteMovie')
+  }
+
 }

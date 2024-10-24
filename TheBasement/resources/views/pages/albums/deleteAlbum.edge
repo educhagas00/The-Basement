@@ -1,0 +1,25 @@
+@layouts.app()
+<div class="min-h-screen flex items-center justify-center">
+    <div class="flex flex-col  w-full max-w-md justify-center text-timberwolf">
+        @form({ action: route('albums.destroy')+'?_method=DELETE', method: 'POST' })
+            <div class="mb-4">
+                <label for="albumSelect" class="block text-sm font-bold">
+                    Informe o ID do Álbum que deseja deletar:
+                </label>
+                @!input({
+                    name: 'albumId',
+                    type: 'text',
+                    id: 'albumId',
+                    placeholder: 'Insira o ID do Álbum',
+                    class: ''
+                })
+            </div>
+            <div class="flex justify-center">
+                @button({ type: 'submit' })
+                Deletar Álbum
+                @end
+            </div>
+        @end
+    </div>
+</div>
+@end
