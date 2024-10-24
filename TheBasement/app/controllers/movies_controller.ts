@@ -95,6 +95,9 @@ export default class MoviesController {
     if(data.runtime) {
         movie.runtime = data.runtime
     }
+    if(data.description) {
+        movie.description = data.description
+    }    
 
     await movie.save()
 

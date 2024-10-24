@@ -1,7 +1,7 @@
 @layouts.app()
 <div class="min-h-screen flex items-center justify-center">
     <div class="flex flex-col  w-full max-w-md justify-center text-timberwolf">
-        @form({ action: route('albums.update'), method: 'POST' })
+        @form({ action: route('albums.update')+'?_method=PATCH', method: 'POST' })
             <div class="mb-4">
                 <label for="albumSelect" class="block text-sm font-bold">
                     Informe o Álbum que deseja alterar

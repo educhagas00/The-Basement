@@ -59,8 +59,8 @@ router
         router.get('/:page?', [MoviesController, 'index']).as('index')
         router.get('/show/movieId/:movieId?', [MoviesController, 'movieId']).as('movieid')
 
-        router.post('/update', [MoviesController, 'update']).as('update')
-        router.post('/delete', [MoviesController, 'destroy']).as('destroy')
+        router.patch('/update', [MoviesController, 'update']).as('update')
+        router.delete('/delete', [MoviesController, 'destroy']).as('destroy')
         router.post('/', [MoviesController, 'storeMovie']).as('store')
     })
     .prefix('movies')
@@ -103,8 +103,8 @@ router
         router.get('/:page?', [AlbumsController, 'indexAlbum']).as('index')
 
         // logica
-        router.post('/update', [AlbumsController, 'update']).as('update')
-        router.post('/delete', [AlbumsController, 'destroy']).as('destroy')
+        router.patch('/update', [AlbumsController, 'update']).as('update')
+        router.delete('/delete', [AlbumsController, 'destroy']).as('destroy')
         router.post('/', [AlbumsController, 'storeAlbum']).as('store')
     })
     .prefix('albums')
