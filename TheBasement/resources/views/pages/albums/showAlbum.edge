@@ -3,10 +3,9 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row -mx-4 text-timberwolf">
                 <div class="md:flex-1 px-4">
-                    <div class=" bg-gray-300 bg-gray-700 mb-4">
+                    <div class="mb-4">
                         <img src="{{ album.cover_path }}" alt="cover image" alt="album cover" class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
-
                     <div class="font-bold pb-2">Faixas do álbum:</div>
                     @each(song in songs)
                         <div class="flex items">
@@ -15,24 +14,25 @@
                     @end
                 </div>
                 <div class="md:flex-1 px-7 text-lg">
-                    <h1 class="text-5xl font-bold text-timberwolf text-white mb-2 line-clamp-4"> {{ album.name }} </h1>
+                    <h1 class="text-5xl font-bold text-timberwolf mb-2 line-clamp-4">{{ album.name }}</h1>
+                    <h2>nome do artista</h2>
                     <div class="flex mb-4 pt-6 text-2xl">
                         <div class="mr-4 font-bold">
                             <span class="text-3xl text-timberwolf">R$ {{ album.price }}</span>
                         </div>
                         <div>
-                            <span class="font-bold text-timberwolf ">Disponibilidade:</span>
+                            <span class="font-bold text-timberwolf ">Disponibilidade: </span>
                             <span class="text-timberwolf ">Em estoque</span>
                         </div>
                     </div>
-                    <div class=" flex mb-4 pt-6">
+                    <div class="flex mb-4 pt-6">
                         <div class="flex items-center mt-2 pr-8">
-                            <span class="font-bold text-timberwolf ">Duração: </span>
-                            <span class="text-timberwolf "> {{ album.duration }} minutos</span>
+                            <span class="font-bold text-timberwolf ">Duração:</span>
+                            <span class="text-timberwolf ml-2"> {{ album.duration }} minutos</span>
                         </div>
                         <div class="flex items-center mt-2">
-                            <span class="font-bold text-timberwolf ">Data de Lançamento: </span>
-                            <span class="text-timberwolf "> {{ album.release_date }}</span>
+                            <span class="font-bold text-timberwolf ">Data de Lançamento:</span>
+                            <span class="text-timberwolf ml-2">{{ album.release_date }}</span>
                         </div>
                     </div>
                     <div class="flex justify-strech">
