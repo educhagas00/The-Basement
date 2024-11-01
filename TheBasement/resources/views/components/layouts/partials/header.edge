@@ -105,7 +105,7 @@
                             <!-- component -->
                             <form action="{{ route('albums.search') }}" method="GET" class="max-w-md mx-auto w-full">
                                 <label for="default-search"
-                                    class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                                    class="mb-2 text-sm font-medium text-timberwolf-dark sr-only dark:text-white">Search</label>
                                 <div class="relative w-full">
                                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                                         <svg class="w-4 h-4 text-rose" aria-hidden="true"
@@ -115,7 +115,7 @@
                                         </svg>
                                     </div>
                                     <input type="search" id="default-search" name="name"
-                                        class="block w-full p-4 ps-10 text-timberwolf text-sm text-gray-900 caret-rose border border-rose rounded-full bg-gray-50 focus:border-gold focus:outline-none focus:ring-0 bg-rich-black"
+                                        class="block w-full min-w-[400px] p-4 ps-10 text-timberwolf text-sm text-gray-900 caret-rose border border-rose rounded-full bg-gray-50 focus:border-gold focus:outline-none focus:ring-0 bg-rich-black"
                                         placeholder="Search Tracks, Albums, Movies..." required />
                                     <button type="submit"
                                         class="text-timberwolf absolute end-2.5 bottom-2.5 bg-rose font-weight:bold transition duration-300 ease-in-out hover:bg-rose-dark font-medium rounded-full text-sm px-4 py-2">Search
@@ -158,7 +158,7 @@
                         <div class="relative" x-data="{ showAdminMenu: false }">
                             {{-- Botão "Admin" que abre/fecha o menu --}}
                             <button @click="showAdminMenu = !showAdminMenu" type="button"
-                                class="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-rose"
+                                class="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-rose min-w-[120px]"
                                 aria-expanded="false">
                                 <span>Admin</span>
                                 <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
@@ -246,42 +246,6 @@
                                                 <p class="mt-1 text-timberwolf-dark">Delete um álbum da lista de disponibilidade</p>
                                             </div>
                                         </div>
-                                        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-rose-light">
-                                            <div
-                                                class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gold group-hover:bg-rich-black-dark group-hover:text-gold">
-                                                <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    aria-hidden="true" data-slot="icon">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M13.5 16.875h3.375m0 0h3.375m-3.375 0V13.5m0 3.375v3.375M6 10.5h2.25a2.25 2.25 0 0 0 2.25-2.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v2.25A2.25 2.25 0 0 0 6 10.5Zm0 9.75h2.25A2.25 2.25 0 0 0 10.5 18v-2.25a2.25 2.25 0 0 0-2.25-2.25H6a2.25 2.25 0 0 0-2.25 2.25V18A2.25 2.25 0 0 0 6 20.25Zm9.75-9.75H18a2.25 2.25 0 0 0 2.25-2.25V6A2.25 2.25 0 0 0 18 3.75h-2.25A2.25 2.25 0 0 0 13.5 6v2.25a2.25 2.25 0 0 0 2.25 2.25Z" />
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <a href="#" class="font-semibold text-timberwolf hover:text-rich-black-dark">
-                                                    Integrations
-                                                    <span class="absolute inset-0"></span>
-                                                </a>
-                                                <p class="mt-1 text-timberwolf-dark">Connect with third-party tools</p>
-                                            </div>
-                                        </div>
-                                        <div class="group relative flex gap-x-6 rounded-lg p-4 hover:bg-rose-light">
-                                            <div
-                                                class="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gold group-hover:bg-rich-black-dark group-hover:text-gold">
-                                                <svg class="h-6 w-6 text-gray-600 group-hover:text-indigo-600" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    aria-hidden="true" data-slot="icon">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-                                                </svg>
-                                            </div>
-                                            <div>
-                                                <a href="#" class="font-semibold text-timberwolf hover:text-rich-black-dark">
-                                                    Automations
-                                                    <span class="absolute inset-0"></span>
-                                                </a>
-                                                <p class="mt-1 text-timberwolf-dark">Build strategic funnels that will convert</p>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -289,11 +253,9 @@
                     </div>
 
                     <a href="#"
-                        class="w-full px-6 py-2 mr-0 text-timberwolf hover:text-opacity-80 md:px-3 md:mr-2 lg:mr-3 md:w-auto">Sign
-                        In</a>
+                        class="inline-flex items-center min-w-[80px] w-full px-6 py-2 mr-0 text-timberwolf hover:text-opacity-80 md:px-3 md:mr-2 lg:mr-3 md:w-auto">Sign In</a>
                     <a href="#_"
-                        class="inline-flex items-center w-full px-6 py-3 text-sm font-medium leading-4 text-timberwolf bg-rose md:w-auto md:rounded-full focus:outline-none focus:ring-offset-2 transition duration-300 ease-in-out hover:bg-rose-dark">Sign
-                        Up</a>
+                        class="inline-flex items-center w-full min-w-[100px] px-6 py-3 text-sm font-medium leading-4 text-timberwolf bg-rose md:w-auto md:rounded-full focus:outline-none focus:ring-offset-2 transition duration-300 ease-in-out hover:bg-rose-dark">Sign Up</a>
                 </div>
                 <div @click="showMenu = !showMenu"
                     class="absolute right-0 flex flex-col items-center justify-center w-10 h-10 bg-white rounded-full cursor-pointer md:hidden hover:bg-gray-100">
