@@ -144,7 +144,7 @@ export default class AlbumsController {
             }
         }
 
-        return response.redirect(`albums/show/albumId/${albumData.id}`)
+        return response.redirect().toRoute('albums.albumid', { albumId: albumData.id })
     }
 
     async addAlbum({ view }: HttpContext) {
