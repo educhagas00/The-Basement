@@ -29,6 +29,7 @@ export default class AlbumsController {
         return view.render('pages/albums/index', { albums, albumsJson })
     }
 
+    // busca um Album pelo id
     async albumId({ view, params }: HttpContext) {
         // busca um Album pelo id ou retorna um erro 404 caso não encontre
         const album = await db.from('albums').where('albums.album_id', params.albumId).first()
@@ -36,7 +37,7 @@ export default class AlbumsController {
         //const album = await Album.findOrFail(params.album_id)
         
         if (!album) {
-            return view.render('pages/errors/404')
+            return view.render('errors/not_found')
         }
 
         // busca as músicas do Album
@@ -46,6 +47,7 @@ export default class AlbumsController {
         return view.render('pages/albums/showAlbum', { album, songs })
     }
 
+    // busca um álbum pelo nome
     async searchAlbum({ view, request }: HttpContext) {
         const page = request.input('page', 1)
         const limit = 16
@@ -107,7 +109,6 @@ export default class AlbumsController {
 
         await album.save()
 
-
         // agora é preciso puxar as músicas do álbum e salvar no banco de dados
 
         const res_songs: any = await fetch(`https://api.spotify.com/v1/albums/${payload}/tracks`, options)
@@ -143,7 +144,7 @@ export default class AlbumsController {
             }
         }
 
-        return response.redirect().toRoute('albums.albumid', { albumId: album.albumId })
+        return response.redirect(`albums/show/albumId/${albumData.id}`)
     }
 
     async addAlbum({ view }: HttpContext) {
