@@ -20,3 +20,12 @@ export const createAlbumValidator = vine.compile(
         coverPath: vine.string().trim().minLength(5),
     })
 )
+
+export const updateAlbumValidator = vine.compile( 
+    vine.object({
+        albumId: vine.string().minLength(5),
+        name: vine.string().trim().minLength(3),
+        price: vine.number().min(0),
+        duration: vine.number().min(0),
+    })
+)

@@ -3,7 +3,7 @@ import Album from '#models/album'
 import Song from '#models/song'
 import db from '@adonisjs/lucid/services/db'
 import dotenv from 'dotenv'
-import { createAlbumValidator, urlAlbumValidator } from '#validators/album'
+import { createAlbumValidator, urlAlbumValidator, updateAlbumValidator } from '#validators/album'
 dotenv.config()
 
 export default class AlbumsController {
