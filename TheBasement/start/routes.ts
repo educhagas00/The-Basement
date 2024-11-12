@@ -28,6 +28,7 @@ router
 router
     .group(() => {
         router.get('/login', [AuthController, 'login']).as('login')
+        router.get('/register', [AuthController, 'register']).as('register')
     })
     .prefix('auth')
     .as('auth')
