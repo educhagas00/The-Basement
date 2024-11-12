@@ -1,4 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
+import {
+    createAlbumValidator,
+    updateAlbumValidator,
+} from '#validators/album'
 import Album from '#models/album'
 import Song from '#models/song'
 import db from '@adonisjs/lucid/services/db'
@@ -73,7 +77,6 @@ export default class AlbumsController {
     // cria álbum no banco de dados a partir da API do Spotify
     async storeAlbum({ request, response }: HttpContext) { 
 
-
         const options = {
             method: 'GET',
             headers: {
@@ -86,7 +89,7 @@ export default class AlbumsController {
         const match = url.match(/album\/([a-zA-Z0-9]+)(\?|$)/)
         const payload = match ? match[1] : null
 
-        const res = await fetch(`https://api.spotify.com/v1/albums/${payload}`, options) 
+        const res = await fetch(`https://api.spotify.com/v1/albums/${payload}`, options)
         
         const albumData: any = await res.json()
 
