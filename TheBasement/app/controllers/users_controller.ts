@@ -25,12 +25,6 @@ export default class UsersController {
         
         const id = params.id
 
-        // n funciona
-        // if (id == null) {
-        //     response.status(400)
-        //     return { message: 'id required' }
-        // }
-
         for (const user of users) {
             if (user.id === id) {
                 response.status(200)

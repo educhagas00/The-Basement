@@ -11,7 +11,7 @@ import AlbumsController from '#controllers/albums_controller'
 import router from '@adonisjs/core/services/router'
 
 const UsersController = () => import('#controllers/users_controller')
-const SignUpController = () => import('#controllers/sign_up_controller')
+const AuthController = () => import('#controllers/auth_controller')
 const ProductsController = () => import('#controllers/products_controller')
 const MoviesController = () => import('#controllers/movies_controller')
 const SongsController = () => import('#controllers/songs_controller')
@@ -27,12 +27,11 @@ router
 
 router
     .group(() => {
-        router.get('/', [SignUpController, 'index']).as('index')
-        router.get('/:email', [SignUpController, 'show']).as('show')
-        router.post('/', [SignUpController, 'store']).as('create') // Processa os dados do formulário
+        router.get('/login', [AuthController, 'login']).as('login')
+        router.get('/register', [AuthController, 'register']).as('register')
     })
-    .prefix('signup')
-    .as('signup')
+    .prefix('auth')
+    .as('auth')
 
 router
     .group(() => {

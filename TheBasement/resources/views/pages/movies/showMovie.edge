@@ -11,8 +11,8 @@
                     <h1 class="text-6xl font-bold text-gray-800 dark:text-white mb-2"> {{ movie.title }} </h1>
                     <div class="flex mb-4 pt-6">
                         <div class="mr-4 text-2xl">
-                            <span class="font-bold text-gray-700 dark:text-gray-300">Preço:</span>
-                            <span class="text-gray-600 dark:text-gray-300">R$ {{ movie.price }}</span>
+                            <span class="font-bold">Preço:</span>
+                            <span class="">R${{ movie.price }}</span>
                         </div>
                         <div class="text-xl">
                             <span class="font-bold text-gray-700 dark:text-gray-300">Disponibilidade:</span>
@@ -22,16 +22,10 @@
                     <div class="mb-4 pt-6">
                         <span class="font-bold">Descrição:</span>
                         <div class="flex items-center mt-2">
-                            <span class="text-gray-600 dark:text-gray-300">{{ movie.description }}</span>
+                            <span class="text-timberwolf">{{ movie.description }}</span>
                         </div>
-                        <span class="font-bold text-gray-700 dark:text-gray-300">Duração:</span>
-                        <div class="flex items-center mt-2">
-                            <span class="text-gray-600 dark:text-gray-300">{{ movie.runtime }} minutos</span>
-                        </div>
-                        <span class="font-bold text-gray-700 dark:text-gray-300">Data de Lançamento:</span>
-                        <div class="flex items-center mt-2">
-                            <span class="text-gray-600 dark:text-gray-300">{{ movie.releaseDate }}</span>
-                        </div>
+                        <div class="flex items-start font-semibold mt-4">Duração: {{ movie.runtime }} minutos</div>
+                        <span class="flex font-semibold mt-2">Data de Lançamento: {{ movie.release_date }}</span>
                     </div>
                     <div>
                         <div class="flex justify-strech">
