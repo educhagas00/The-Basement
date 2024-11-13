@@ -7,6 +7,7 @@ import Album from '#models/album'
 import Song from '#models/song'
 import db from '@adonisjs/lucid/services/db'
 import dotenv from 'dotenv'
+import { createAlbumValidator, urlAlbumValidator, updateAlbumValidator } from '#validators/album'
 dotenv.config()
 
 export default class AlbumsController {
@@ -84,9 +85,10 @@ export default class AlbumsController {
             }
         }
 
-        const url = request.input('albumId')
+        const url = await request.validateUsing(urlAlbumValidator)
 
-        const match = url.match(/album\/([a-zA-Z0-9]+)(\?|$)/)
+        const match = url.albumId.match(/album\/([a-zA-Z0-9]+)(\?|$)/)
+
         const payload = match ? match[1] : null
 
         const res = await fetch(`https://api.spotify.com/v1/albums/${payload}`, options)
@@ -111,7 +113,7 @@ export default class AlbumsController {
         album.coverPath = albumData.images[0].url
 
         await album.save()
-
+      
         // agora é preciso puxar as músicas do álbum e salvar no banco de dados
 
         const res_songs: any = await fetch(`https://api.spotify.com/v1/albums/${payload}/tracks`, options)
