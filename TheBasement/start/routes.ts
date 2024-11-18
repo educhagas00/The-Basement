@@ -31,9 +31,7 @@ router
 router
     .group(() => {
 
-        router.get('/register', [AuthController, 'create']).as('create')
-
-        router.get('/login', [AuthController, 'create']).as('login')
+        router.get('/login', [AuthController, 'create']).as('create')
         router.post('/login', [AuthController, 'store']).as('store')
         router.get('/logout', [AuthController, 'destroy']).as('destroy')
     })
