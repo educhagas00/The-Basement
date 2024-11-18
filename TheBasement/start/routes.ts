@@ -16,19 +16,26 @@ const ProductsController = () => import('#controllers/products_controller')
 const MoviesController = () => import('#controllers/movies_controller')
 const SongsController = () => import('#controllers/songs_controller')
 
+
 router
     .group(() => {
-        router.get('/', [UsersController, 'index']).as('index')
-        router.get('/:id', [UsersController, 'show']).where('id', router.matchers.number()).as('show')
-        router.post('/', [UsersController, 'create']).as('create')
+        //router.get('/', [UsersController, 'index']).as('index')
+        //router.get('/:id', [UsersController, 'show']).where('id', router.matchers.number()).as('show')
+
+        router.get('/register', [UsersController, 'create']).as('create')
+        router.post('/users', [UsersController, 'store']).as('store')
     })
     .prefix('users')
     .as('users')
 
 router
     .group(() => {
-        router.get('/login', [AuthController, 'login']).as('login')
-        router.get('/register', [AuthController, 'register']).as('register')
+
+        router.get('/register', [AuthController, 'create']).as('create')
+
+        router.get('/login', [AuthController, 'create']).as('login')
+        router.post('/login', [AuthController, 'store']).as('store')
+        router.get('/logout', [AuthController, 'destroy']).as('destroy')
     })
     .prefix('auth')
     .as('auth')
