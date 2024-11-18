@@ -3,18 +3,17 @@ import { createUserValidator } from '#validators/user'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class UsersController {
-    
-    async index({ view }: HttpContext) {
-    }
-    
 
     async create({ view }: HttpContext) { 
-        return view.render('pages/users/create')
+        return view.render('pages/users/register');
     }
 
     async store({ request, response }: HttpContext) {
-        const payload = await request.validateUsing(createUserValidator)
 
+        const data = request.all()
+        console.log(data)
+
+        const payload = await request.validateUsing(createUserValidator);
         console.log(payload)
 
         const user = new User()
@@ -22,7 +21,7 @@ export default class UsersController {
 
         await user.save()
 
-        return response.redirect().toRoute('auth.create')
+        return response.redirect().toRoute('auth.signin')
     }
 
 
