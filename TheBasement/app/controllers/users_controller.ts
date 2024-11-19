@@ -1,60 +1,28 @@
+import User from '#models/user'
+import { createUserValidator } from '#validators/user'
 import type { HttpContext } from '@adonisjs/core/http'
-
-let sequence = 2
-
-const users = [
-    {
-        id: 1,
-        name: 'Victor',
-        email: 'v@teste.com',
-    },
-    {
-        id: 2,
-        name: 'Eduardo',
-        email: 'edu@teste.com',
-    },
-]
 
 export default class UsersController {
     
     async index({ view }: HttpContext) {
-        return view.render('users/usuarios', {users})
+    }
+    
+
+    async create({ view }: HttpContext) { 
+        return view.render('pages/users/create')
     }
 
-    show({ params, response }: HttpContext) {
-        
-        const id = params.id
+    async store({ request, response }: HttpContext) {
+        const payload = await request.validateUsing(createUserValidator)
 
-        for (const user of users) {
-            if (user.id === id) {
-                response.status(200)
-                return user
-            }
-        }
+        console.log(payload)
 
-        response.status(404)
+        const user = new User()
+        user.merge(payload)
 
-        return { message: 'not found' }
-    }
+        await user.save()
 
-    create({ request, response }: HttpContext) { 
-
-        // pega apenas os parâmetros desejados do request
-        const newUser = request.only(['name', 'email'])
-
-        sequence += 1
-
-        users.push({
-            id: sequence,
-            ...newUser,
-            // açúcar sintático para:
-            // name: newUser.name
-            // email: newUser.email
-        })
-
-        response.status(200)
-        return { message: 'foi'}
-        // return response.redirect().toRoute('users.show', { id: sequence })
+        return response.redirect().toRoute('auth.create')
     }
 
 

@@ -9,6 +9,7 @@
 
 import AlbumsController from '#controllers/albums_controller'
 import router from '@adonisjs/core/services/router'
+import { middleware } from './kernel.js'
 
 const UsersController = () => import('#controllers/users_controller')
 const AuthController = () => import('#controllers/auth_controller')
@@ -16,19 +17,24 @@ const ProductsController = () => import('#controllers/products_controller')
 const MoviesController = () => import('#controllers/movies_controller')
 const SongsController = () => import('#controllers/songs_controller')
 
+
 router
     .group(() => {
-        router.get('/', [UsersController, 'index']).as('index')
-        router.get('/:id', [UsersController, 'show']).where('id', router.matchers.number()).as('show')
-        router.post('/', [UsersController, 'create']).as('create')
+        //router.get('/', [UsersController, 'index']).as('index')
+        //router.get('/:id', [UsersController, 'show']).where('id', router.matchers.number()).as('show')
+
+        router.get('/register', [UsersController, 'create']).as('create')
+        router.post('/users', [UsersController, 'store']).as('store')
     })
     .prefix('users')
     .as('users')
 
 router
     .group(() => {
-        router.get('/login', [AuthController, 'login']).as('login')
-        router.get('/register', [AuthController, 'register']).as('register')
+
+        router.get('/login', [AuthController, 'create']).as('create')
+        router.post('/login', [AuthController, 'store']).as('store')
+        router.get('/logout', [AuthController, 'destroy']).use(middleware.auth()).as('destroy')
     })
     .prefix('auth')
     .as('auth')
@@ -51,9 +57,9 @@ router
 
 router
     .group(() => {
-        router.get('/addMovie', [MoviesController, 'addMovie']).as('addmovie')
-        router.get('/updateMovie', [MoviesController, 'updateMovie']).as('updatemovie')
-        router.get('/deleteMovie', [MoviesController, 'deleteMovie']).as('deletemovie')
+        router.get('/addMovie', [MoviesController, 'addMovie']).use(middleware.auth()).as('addmovie')
+        router.get('/updateMovie', [MoviesController, 'updateMovie']).use(middleware.auth()).as('updatemovie')
+        router.get('/deleteMovie', [MoviesController, 'deleteMovie']).use(middleware.auth()).as('deletemovie')
 
         router.get('/:page?', [MoviesController, 'index']).as('index')
         router.get('/show/movieId/:movieId?', [MoviesController, 'movieId']).as('movieid')
@@ -92,9 +98,9 @@ router
 router
     .group(() => {      
         //renderiza telas
-        router.get('/addAlbum', [AlbumsController, 'addAlbum']).as('addalbum')
-        router.get('/updateAlbum', [AlbumsController, 'updateAlbum']).as('updatealbum')
-        router.get('/deleteAlbum', [AlbumsController, 'deleteAlbum']).as('deletealbum')
+        router.get('/addAlbum', [AlbumsController, 'addAlbum']).use(middleware.auth()).as('addalbum')
+        router.get('/updateAlbum', [AlbumsController, 'updateAlbum']).use(middleware.auth()).as('updatealbum')
+        router.get('/deleteAlbum', [AlbumsController, 'deleteAlbum']).use(middleware.auth()).as('deletealbum')
 
         router.get('/search/:page?', [AlbumsController, 'searchAlbum']).as('search')
 

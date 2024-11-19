@@ -28,11 +28,12 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column({ serializeAs: null })
   declare password: string
 
-  @column()
-  declare phone: string
+  //@column()
+  //declare phone: string
 
-  @column()
-  declare birthdate: DateTime | null
+  // @column()
+  // declare birthdate: DateTime | null 
+  //tavam dando merdaaaaaaaaa
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
