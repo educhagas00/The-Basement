@@ -23,8 +23,12 @@ router
         //router.get('/', [UsersController, 'index']).as('index')
         //router.get('/:id', [UsersController, 'show']).where('id', router.matchers.number()).as('show')
 
+        router.get('/updateUser', [UsersController, 'updateUser']).use(middleware.auth()).as('updateUser') // renderiza a tela de registro
+
         router.get('/register', [UsersController, 'create']).as('create') // renderiza a tela de registro
         router.post('/', [UsersController, 'store']).as('store') // executa o registro
+
+        router.patch('/update', [UsersController, 'update']).use(middleware.auth()).as('update') // atualiza um usuário
     })
     .prefix('users')
     .as('users')

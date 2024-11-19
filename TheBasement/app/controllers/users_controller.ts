@@ -24,6 +24,40 @@ export default class UsersController {
         return response.redirect().toRoute('auth.signin')
     }
 
+    async update({ auth, view, request, response }: HttpContext) {
+
+        const user = await auth.getUserOrFail()
+
+        //console.log(username.username)
+
+        const data = request.only(['username', 'firstName', 'lastName'])
+
+        if (!user) {
+            return view.render('pages/errors/404')
+        }
+
+        if(data.username) {
+            user.username = data.username
+        }
+        if(data.firstName) {
+            user.firstName = data.firstName
+        }
+        if(data.lastName) {
+            user.lastName = data.lastName
+        }
+
+        user.save()
+
+        await user.save()
+
+        return response.redirect().toRoute('albums.index')
+        
+    }
+
+    async updateUser({ view }: HttpContext) {
+        return view.render('pages/users/updateUser')
+    }
+
 
     
 }
