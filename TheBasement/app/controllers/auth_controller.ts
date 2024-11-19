@@ -21,7 +21,8 @@ export default class AuthController {
 
     }
 
-    async destroy({ view }: HttpContext) {
-        return view.render('pages/auth/logout')
+    async destroy({ response, auth }: HttpContext) {
+        await auth.use('web').logout()
+        return response.redirect().toRoute('albums.index')
     }
 }
