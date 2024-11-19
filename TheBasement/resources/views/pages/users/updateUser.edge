@@ -1,0 +1,58 @@
+@layouts.app()
+<div class="min-h-screen flex items-center justify-center">
+    <div class="flex flex-col  w-full max-w-md justify-center text-timberwolf">
+
+            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Editando dados de {{ auth.user.username }} </h1>
+
+        @form({ action: route('users.update')+'?_method=PATCH', method: 'POST' })
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-bold text-gray-300">
+                    username
+                </label>
+                @!input({
+                    name: 'username',
+                    type: 'text',
+                    id: 'username',
+                    placeholder: '',
+                    class: ''
+                })
+            </div>
+            <div class="mb-4">
+                <label for="" class="block text-sm font-bold text-gray-300">
+                    first name
+                </label>
+                @!input({
+                    name: 'firstName',
+                    type: 'text',
+                    id: 'firstName',
+                    placeholder: '',
+                    class: ''
+                })
+            </div>
+            <div class="mb-4">
+                <label for="duration" class="block text-sm font-bold text-gray-300">
+                    last name
+                </label>
+                @!input({
+                    name: 'lastName',
+                    type: 'float',
+                    id: 'lastName',
+                    placeholder: '',
+                    class: ''
+                })
+            </div>
+                <!-- Campo oculto para auth.user.username -->
+                @!input({
+                    name: 'auth_username',
+                    type: 'hidden',
+                    value: '{{ auth.user.username }}'
+                })
+            <div class="flex justify-center mr-20">
+                @button({ type: 'submit' })
+                Atualizar Usuário
+                @end
+            </div>
+        @end
+    </div>
+</div>
+@end
