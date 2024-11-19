@@ -10,8 +10,8 @@ export default class UsersController {
 
     async store({ request, response }: HttpContext) {
 
-        const data = request.all()
-        console.log(data)
+        // const data = request.all()
+        // console.log(data)
 
         const payload = await request.validateUsing(createUserValidator);
         console.log(payload)
