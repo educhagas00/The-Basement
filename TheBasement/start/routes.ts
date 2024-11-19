@@ -23,18 +23,18 @@ router
         //router.get('/', [UsersController, 'index']).as('index')
         //router.get('/:id', [UsersController, 'show']).where('id', router.matchers.number()).as('show')
 
-        router.get('/register', [UsersController, 'create']).as('create')
-        router.post('/users', [UsersController, 'store']).as('store')
+        router.get('/register', [UsersController, 'create']).as('create') // renderiza a tela de registro
+        router.post('/', [UsersController, 'store']).as('store') // executa o registro
     })
     .prefix('users')
     .as('users')
 
 router
     .group(() => {
+        router.get('/login', [AuthController, 'create']).as('signin') // renderiza a tela de login
+        router.post('/login', [AuthController, 'store']).as('login') // executa o login
 
-        router.get('/login', [AuthController, 'create']).as('create')
-        router.post('/login', [AuthController, 'store']).as('store')
-        router.get('/logout', [AuthController, 'destroy']).use(middleware.auth()).as('destroy')
+        router.get('/logout', [AuthController, 'destroy']).use(middleware.auth()).as('logout')
     })
     .prefix('auth')
     .as('auth')
