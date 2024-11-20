@@ -2,57 +2,60 @@
 <div class="min-h-screen flex items-center justify-center">
     <div class="flex flex-col  w-full max-w-md justify-center text-timberwolf">
 
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Editando dados de {{ auth.user.username }} </h1>
+            <h1 class=" mb-10 text-3xl font-bold text-timberwolf">Editando dados de {{ auth.user.username }} </h1>
 
         @form({ action: route('users.update')+'?_method=PATCH', method: 'POST' })
             <div class="mb-4">
-                <label for="name" class="block text-sm font-bold text-gray-300">
-                    username
+                <label for="name" class="block text-sm font-bold text-timberwolf">
+                    Alterar Nome de Usuário (opcional)
                 </label>
                 @!input({
                     name: 'username',
                     type: 'text',
                     id: 'username',
-                    placeholder: '',
+                    placeholder: 'Novo nome de usuário',
                     class: ''
                 })
             </div>
+
             <div class="mb-4">
-                <label for="" class="block text-sm font-bold text-gray-300">
-                    first name
+                <label for="" class="block text-sm font-bold text-timberwolf">
+                    Alterar Primeiro Nome (opcional)
                 </label>
                 @!input({
                     name: 'firstName',
                     type: 'text',
                     id: 'firstName',
-                    placeholder: '',
+                    placeholder: 'Novo primeiro nome',
                     class: ''
                 })
             </div>
+
             <div class="mb-4">
-                <label for="duration" class="block text-sm font-bold text-gray-300">
-                    last name
+                <label for="duration" class="block text-sm font-bold text-timberwolf">
+                    Alterar Último Nome (opcional)
                 </label>
                 @!input({
                     name: 'lastName',
                     type: 'float',
                     id: 'lastName',
-                    placeholder: '',
-                    class: ''
+                    placeholder: 'Novo último nome',
+                    class: 'w-full'
                 })
             </div>
-                <!-- Campo oculto para auth.user.username -->
-                @!input({
-                    name: 'auth_username',
-                    type: 'hidden',
-                    value: '{{ auth.user.username }}'
-                })
-            <div class="flex justify-center mr-20">
-                @button({ type: 'submit' })
-                Atualizar Usuário
+
+            <!-- Campo oculto para auth.user.username -->
+            @!input({
+                name: 'auth_username',
+                type: 'hidden',
+                value: '{{ auth.user.username }}'
+            })
+            <div class="mr-4">
+                @button({ type: 'submit', properties: 'flex w-full items-center justify-center rounded-md bg-rose px-3 py-1.5 text-sm/6 mt-8 text-rich-black font-semibold shadow-sm bg-transition-opacity duration-200 bg-opacity-75 hover:bg-opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-sky' })
+                Alterar Dados
                 @end
             </div>
-        @end
+        @endform
     </div>
 </div>
 @end

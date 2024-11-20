@@ -1,5 +1,5 @@
 import User from '#models/user'
-import { createUserValidator } from '#validators/user'
+import { createUserValidator, updateUserValidator } from '#validators/user'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class UsersController {
@@ -26,32 +26,31 @@ export default class UsersController {
 
     async update({ auth, view, request, response }: HttpContext) {
 
-        const user = await auth.getUserOrFail()
-
-        //console.log(username.username)
-
-        const data = request.only(['username', 'firstName', 'lastName'])
-
+        const user = auth.getUserOrFail()
+        // console.log(user)
         if (!user) {
             return view.render('pages/errors/404')
         }
 
-        if(data.username) {
-            user.username = data.username
+        const payload = await request.validateUsing(updateUserValidator);
+        const { username, firstName, lastName } = payload;
+
+        if (username) {
+            user.username = username;
         }
-        if(data.firstName) {
-            user.firstName = data.firstName
+        if (firstName) {
+            user.firstName = firstName;
         }
-        if(data.lastName) {
-            user.lastName = data.lastName
+        if (lastName) {
+            user.lastName = lastName;
         }
+        console.log(payload);
 
         user.save()
 
         await user.save()
 
         return response.redirect().toRoute('albums.index')
-        
     }
 
     async updateUser({ view }: HttpContext) {
