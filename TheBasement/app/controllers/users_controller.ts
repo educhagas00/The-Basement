@@ -1,5 +1,5 @@
 import User from '#models/user'
-import { createUserValidator } from '#validators/user'
+import { createUserValidator, updateUserValidator } from '#validators/user'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class UsersController {
@@ -30,20 +30,22 @@ export default class UsersController {
 
         //console.log(username.username)
 
-        const data = request.only(['username', 'firstName', 'lastName'])
+        const payload = await request.validateUsing(updateUserValidator);
 
-        if (!user) {
-            return view.render('pages/errors/404')
+        try {
+            await User.verifyCredentials(user.email, payload.password)
+        } catch {
+            return response.badRequest('Senha incorreta')
         }
 
-        if(data.username) {
-            user.username = data.username
+        if(payload.username) {
+            user.username = payload.username
         }
-        if(data.firstName) {
-            user.firstName = data.firstName
+        if(payload.firstName) {
+            user.firstName = payload.firstName
         }
-        if(data.lastName) {
-            user.lastName = data.lastName
+        if(payload.lastName) {
+            user.lastName = payload.lastName
         }
 
         user.save()
