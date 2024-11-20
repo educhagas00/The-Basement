@@ -35,6 +35,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   // declare birthdate: DateTime | null 
   //tavam dando merdaaaaaaaaa
 
+  @column()
+  declare role: boolean
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

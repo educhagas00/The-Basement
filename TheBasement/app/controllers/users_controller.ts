@@ -43,6 +43,13 @@ export default class UsersController {
         }
         if (lastName) {
             user.lastName = lastName;
+
+        try {
+            await User.verifyCredentials(user.email, payload.password)
+        } catch {
+            return response.badRequest('Senha incorreta')
+        }
+
         }
         console.log(payload);
 
@@ -55,8 +62,5 @@ export default class UsersController {
 
     async updateUser({ view }: HttpContext) {
         return view.render('pages/users/updateUser')
-    }
-
-
-    
+    } 
 }

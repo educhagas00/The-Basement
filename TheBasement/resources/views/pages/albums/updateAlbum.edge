@@ -1,9 +1,10 @@
 @layouts.app()
+
 <div class="min-h-screen flex items-center justify-center">
-    <div class="flex flex-col  w-full max-w-md justify-center text-timberwolf">
+    <div class="flex min-h-full flex-col justify-center px-6 mt-4 mb-4 py-12 lg:px-8 sm:mx-auto sm:w-full sm:max-w-md bg-timberwolf bg-opacity-85 rounded-lg shadow-md">
         @form({ action: route('albums.update')+'?_method=PATCH', method: 'POST' })
             <div class="mb-4">
-                <label for="albumSelect" class="block text-sm font-bold">
+                <label for="albumSelect" class="block text-sm text-rich-black font-bold">
                     Informe o Álbum que deseja alterar
                 </label>
                 @!input({
@@ -15,7 +16,7 @@
                 })
             </div>
             <div class="mb-4">
-                <label for="name" class="block text-sm font-bold text-gray-300">
+                <label for="name" class="block text-sm font-bold text-rich-black">
                     Novo Nome do Álbum (opcional)
                 </label>
                 @!input({
@@ -27,7 +28,7 @@
                 })
             </div>
             <div class="mb-4">
-                <label for="price" class="block text-sm font-bold text-gray-300">
+                <label for="price" class="block text-sm font-bold text-rich-black">
                     Novo Preço do Álbum (opcional)
                 </label>
                 @!input({
@@ -39,7 +40,7 @@
                 })
             </div>
             <div class="mb-4">
-                <label for="duration" class="block text-sm font-bold text-gray-300">
+                <label for="duration" class="block text-sm font-bold text-rich-black">
                     Nova Duração do Álbum (opcional)
                 </label>
                 @!input({
@@ -50,8 +51,8 @@
                     class: ''
                 })
             </div>
-            <div class="flex justify-center mr-20">
-                @button({ type: 'submit' })
+            <div class="block text-sm">
+                @button({ type: 'submit', properties: 'flex w-full justify-center rounded-md bg-rose px-3 py-1.5 text-sm/6 mt-8 text-rich-black font-semibold shadow-sm bg-transition-opacity duration-200 bg-opacity-75 hover:bg-opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-sky' })
                 Alterar Álbum
                 @end
             </div>
