@@ -1,58 +1,160 @@
 @layouts.app()
-<div class="min-h-screen flex items-center justify-center">
-    <div class="flex flex-col  w-full max-w-md justify-center text-timberwolf">
+<body class="h-full">
+    <div class="flex min-h-full flex-col justify-center px-6 mt-4 mb-4 py-12 lg:px-8 sm:mx-auto sm:w-full sm:max-w-md bg-timberwolf bg-opacity-85 rounded-lg shadow-md">
 
-            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Editando dados de {{ auth.user.username }} </h1>
+        <div class="flex items-center justify-center h-full md:py-8 text-rich-black-dark">
+            <a href="{{ route("albums.index") }}" class="flex items-center py-4 space-x-2 font-extrabold text-rich-black-dark md:py-0">
+                <span class="flex items-center justify-center w-12 h-12">
+                    <img src="{{ asset('resources/images/porta_preta.png') }}" alt="Logo">
+                </span>
+                {{-- lógica do the basement digitado --}}
+                <span>
+                    <div x-data="{
+                        text: '',
+                        textArray : ['The Basement'],
+                        textIndex: 0,
+                        charIndex: 0,
+                        typeSpeed: 110,
+                        cursorSpeed: 550,
+                        pauseEnd: 1500,
+                        pauseStart: 20,
+                        direction: 'forward',
+                    }" x-init="$nextTick(() => {
+                        let typingInterval = setInterval(startTyping, $data.typeSpeed);
+                    
+                        function startTyping(){
+                            let current = $data.textArray[ $data.textIndex ];
+                            
+                            // check to see if we hit the end of the string
+                            if($data.charIndex > current.length){
+                                    $data.direction = 'backward';
+                                    clearInterval(typingInterval);
+                            }   
+                                
+                            $data.text = current.substring(0, $data.charIndex);
+                            
+                            if($data.direction == 'forward')
+                            {
+                                $data.charIndex += 1;
+                            } 
+                            else 
+                            {
+                                if($data.charIndex == 0)
+                                {
+                                    $data.direction = 'forward';
+                                    clearInterval(typingInterval);
+                                    setTimeout(function(){
+                                        $data.textIndex += 1;
+                                        if($data.textIndex >= $data.textArray.length)
+                                        {
+                                            $data.textIndex = 0;
+                                        }
+                                        typingInterval = setInterval(startTyping, $data.typeSpeed);
+                                    }, $data.pauseStart);
+                                }
+                                $data.charIndex -= 1;
+                            }
+                        }
+                                    
+                        setInterval(function(){
+                            if($refs.cursor.classList.contains('hidden'))
+                            {
+                                $refs.cursor.classList.remove('hidden');
+                            } 
+                            else 
+                            {
+                                $refs.cursor.classList.add('hidden');
+                            }
+                        }, $data.cursorSpeed);
+                
+                    })" class="flex items-center justify-center mx-auto text-center max-w-7xl text-rich-black-dark">
+                        <div class="relative flex items-center justify-center h-auto text-rich-black-dark">
+                            <p class="text-2xl font-black leading-tight text-rich-black-dark" x-text="text"></p>
+                            <span class="absolute right-0 w-2 -mr-2 bg-black h-3/4 text-rich-black-dark"
+                                x-ref="cursor"></span>
+                        </div>
+                    </div>
+                </span>
+            </a>
+        </div>
 
-        @form({ action: route('users.update')+'?_method=PATCH', method: 'POST' })
-            <div class="mb-4">
-                <label for="name" class="block text-sm font-bold text-gray-300">
-                    username
-                </label>
-                @!input({
-                    name: 'username',
-                    type: 'text',
-                    id: 'username',
-                    placeholder: '',
-                    class: ''
-                })
-            </div>
-            <div class="mb-4">
-                <label for="" class="block text-sm font-bold text-gray-300">
-                    first name
-                </label>
-                @!input({
-                    name: 'firstName',
-                    type: 'text',
-                    id: 'firstName',
-                    placeholder: '',
-                    class: ''
-                })
-            </div>
-            <div class="mb-4">
-                <label for="duration" class="block text-sm font-bold text-gray-300">
-                    last name
-                </label>
-                @!input({
-                    name: 'lastName',
-                    type: 'float',
-                    id: 'lastName',
-                    placeholder: '',
-                    class: ''
-                })
-            </div>
+        <div class="flex h-full text-rich-black-dark">
+            <h1 class="flex my-3 justify-center font-bold text-rich-black-dark">
+                Vamos atualizar seus dados, {{ auth.user.username }}
+            </h1>
+        </div>
+
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            @form({ action: route('users.update')+'?_method=PATCH', method: 'POST' })
+
+                <div>
+                    <label for="username" class="block text-sm font-semibold text-rich-black">Username</label>
+                    @!input({
+                        name: 'username',
+                        type: 'text',
+                        id: 'username',
+                        placeholder: '',
+                        class: ''
+                    })
+                </div>
+
+                <div>
+                    <label for="first_name" class="block text-sm font-semibold text-rich-black">Primeiro Nome</label>
+                    @!input({
+                        name: 'firstName',
+                        type: 'text',
+                        id: 'firstName',
+                        placeholder: '',
+                        class: 'mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 sm:text-sm'
+                    })
+                </div>
+
+                <div>
+                    <label for="last_name" class="block text-sm font-semibold text-rich-black">Último Nome</label>
+                    @!input({
+                        name: 'lastName',
+                        type: 'text',
+                        placeholder: '',
+                        id: 'lastName',
+                        class: 'mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 sm:text-sm'
+                    })
+                </div>
+                
+                <div>
                 <!-- Campo oculto para auth.user.username -->
                 @!input({
                     name: 'auth_username',
                     type: 'hidden',
                     value: '{{ auth.user.username }}'
                 })
-            <div class="flex justify-center mr-20">
-                @button({ type: 'submit' })
-                Atualizar Usuário
-                @end
-            </div>
-        @end
+                </div>
+
+                <div>
+                    <label for="password" class=" block text-sm font-semibold text-center text-rich-black required:">Insira sua senha</label>
+                    @!input({
+                        name: 'password',
+                        type: 'password',
+                        placeholder: '',
+                        id: 'password',
+                        class: 'mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 sm:text-sm',
+                        required: true
+                    })
+                    </div>
+                </div>
+
+                <div>
+                    @button({ type: 'submit', properties: 'flex w-full justify-center rounded-md bg-rose px-3 py-1.5 text-sm/6 mt-8 text-rich-black font-semibold shadow-sm bg-transition-opacity duration-200 bg-opacity-75 hover:bg-opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-sky' })
+                    Atualizar dados
+                    @end
+                </div>
+            </form>
+
+            <p class="mt-10 text-center text-sm/6 font-semibold">
+                Já é membro do Porão?
+                <a href="{{ route('auth.signin') }}" class="font-semibold text-rose hover:text-persian-indigo">Entre agora</a>
+            </p>
+            @endform
+        </div>
     </div>
-</div>
+</body>
 @end

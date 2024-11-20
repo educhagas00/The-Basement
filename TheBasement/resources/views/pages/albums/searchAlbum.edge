@@ -4,8 +4,8 @@
 
     <div class="mt-6 space-y-6 bg-rich-black">
         @each(album in albums)
-        <div class="flex items-center text-timberwolf space-x-4 p-4 bg-gray-800 rounded-md">
-            <div class=" w-1/6 h-1/6 overflow-hidden rounded-md bg-gray-200">
+        <div class="album-item flex items-center text-timberwolf space-x-4 p-4 bg-gray-800 rounded-md">
+            <div class="w-1/6 h-1/6 overflow-hidden rounded-md bg-gray-200">
                 <a href="{{ route('albums.albumid', { albumId: album.albumId }) }}" class="flex">
                     <img src="{{ album.coverPath }}" alt="cover image" class="h-full w-full object-cover object-center">
                 </a>
