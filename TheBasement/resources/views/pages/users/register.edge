@@ -126,9 +126,9 @@
                 <div>
                     <label for="first_name" class="block text-sm font-semibold text-rich-black">Primeiro Nome</label>
                     @!input({
-                        name: 'first_name',
+                        name: 'firstName',
                         type: 'text',
-                        id: 'first_name',
+                        id: 'firstName',
                         placeholder: 'Vinilcius',
                         class: 'mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 sm:text-sm'
                     })
@@ -137,9 +137,9 @@
                 <div>
                     <label for="last_name" class="block text-sm font-semibold text-rich-black">Último Nome</label>
                     @!input({
-                        name: 'last_name',
+                        name: 'lastName',
                         type: 'text',
-                        id: 'last_name',
+                        id: 'lastName',
                         placeholder: 'Souza',
                         class: 'mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 sm:text-sm'
                     })
@@ -179,6 +179,15 @@
                         placeholder: 'chave do porão',
                         class: 'mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 sm:text-sm',
                         required: true
+                    })
+                </div>
+
+                <div class="hidden">
+                    @!input({
+                        name: 'role',
+                        value: 0,
+                        type: 'hidden',
+                        id: 'role'
                     })
                 </div>
 

@@ -14,6 +14,41 @@
     color: #161b22;
 }
 
+.album-item {
+    position: relative;
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.album-item::before,
+.album-item::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #f91880;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.album-item::before {
+    top: 0;
+}
+
+.album-item::after {
+    bottom: 0;
+}
+
+.album-item:hover {
+    background-color: #161b22; /* Fundo cinza claro */
+}
+
+.album-item:hover::before,
+.album-item:hover::after {
+    opacity: 1;
+}
+
 
 @keyframes grid {
 0% { transform: translateY(-50%); }
