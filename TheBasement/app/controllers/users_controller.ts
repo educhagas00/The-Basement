@@ -10,8 +10,8 @@ export default class UsersController {
 
     async store({ request, response }: HttpContext) {
 
-        // const data = request.all()
-        // console.log(data)
+        const data = request.all()
+        console.log(data)
 
         const payload = await request.validateUsing(createUserValidator);
         console.log(payload)
@@ -26,23 +26,11 @@ export default class UsersController {
 
     async update({ auth, view, request, response }: HttpContext) {
 
-        const user = auth.getUserOrFail()
-        // console.log(user)
-        if (!user) {
-            return view.render('pages/errors/404')
-        }
+        const user = await auth.getUserOrFail()
+
+        //console.log(username.username)
 
         const payload = await request.validateUsing(updateUserValidator);
-        const { username, firstName, lastName } = payload;
-
-        if (username) {
-            user.username = username;
-        }
-        if (firstName) {
-            user.firstName = firstName;
-        }
-        if (lastName) {
-            user.lastName = lastName;
 
         try {
             await User.verifyCredentials(user.email, payload.password)
@@ -50,17 +38,28 @@ export default class UsersController {
             return response.badRequest('Senha incorreta')
         }
 
+        if(payload.username) {
+            user.username = payload.username
         }
-        console.log(payload);
+        if(payload.firstName) {
+            user.firstName = payload.firstName
+        }
+        if(payload.lastName) {
+            user.lastName = payload.lastName
+        }
 
         user.save()
 
         await user.save()
 
         return response.redirect().toRoute('albums.index')
+        
     }
 
     async updateUser({ view }: HttpContext) {
         return view.render('pages/users/updateUser')
-    } 
+    }
+
+
+    
 }
