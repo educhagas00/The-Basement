@@ -44,7 +44,7 @@ export default class MoviesController {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: `Bearer ${process.env.TMDB_ACESS_TOKEN}`
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNDM2ZDBlOTliYzMzYWU0NTlhYmNlMjdhZWJhOTNiNiIsIm5iZiI6MTcyODI0MjU5MC4xOTc2MDksInN1YiI6IjY2ZmRkMzljOWViZWExOTAwNmY3YjY0OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gU0cLBQnxLCb5dyfWjyyqaWXCldtcxIUUTsWmTjWwto'
       }
     };
     
@@ -52,7 +52,11 @@ export default class MoviesController {
 
     const res = await fetch(`https://api.themoviedb.org/3/movie/${payload}?language=en-US`, options)
 
+    console.log(res)
+
     const movieData:any = await res.json()
+
+    console.log(movieData)
 
     const movie = new Movie()
 
