@@ -15,23 +15,23 @@
                     <a href="{{ route('movies.movieid', { movieId: movie.movieId }) }}" class="nav-link">
                         {{ movie.title }}
                     </a>
-                    <p class="mt-1 text-sm text-gray-500"> {{ movie.runtime }} minutos </p>
+                    <p class="mt-1 text-sm text-timberwolf"> {{ movie.runtime }} minutos </p>
                 </div>
-                <p class="text-sm font-medium text-gray-900">R$ {{ movie.price }}</p>
+                <p class="text-sm font-medium text-timberwolf">R$ {{ movie.price }}</p>
             </div>
         </div>
         @end
     </div>
-    <br>
-    <center>
-        <div class="text-rose">
-            @if(moviesJson.meta.currentPage > moviesJson.meta.firstPage)
-            <a href="{{ route('movies.index', { page: moviesJson.meta.previousPageUrl }) }}">Anterior</a>
-            @endif
-            @if(moviesJson.meta.currentPage < moviesJson.meta.lastPage)
-            <a href="{{ route('movies.index', { page: moviesJson.meta.nextPageUrl }) }}">Próxima</a>
-            @endif
+
+@if(moviesJson.meta.currentPage === moviesJson.meta.lastPage)
+        <div class="mt-4 text-rose" hx-get="{{ route('movies.index', { page: moviesJson.meta.nextPageUrl }) }}" hx-trigger="mouseenter once">
+            [Here Mouse, Mouse!]
         </div>
-    </center>
+    @elseif(moviesJson.meta.nextPageUrl !== null)
+        {{-- colocar um gif de carregamento depois! --}}
+        <div class="mt-4 text-rose" hx-get="{{ route('movies.index', { page: moviesJson.meta.nextPageUrl }) }}" hx-trigger="mouseenter once">
+            [Here Mouse, Mouse!]
+        </div>
+    @endif
 </div>
 @end

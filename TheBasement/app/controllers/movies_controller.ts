@@ -15,14 +15,18 @@ export default class MoviesController {
     const query = Movie.query()
 
     if (payload.title && payload.title.length > 0) {
-        query.where('title', 'like', `%${payload.title}%`)
+      query.where('title', 'like', `%${payload.title}%`)
     }
 
     const movies = await query.paginate(page, limit)
     const moviesJson = movies.toJSON()
 
-    // return songsJson
-    return view.render('pages/movies/index', { movies, moviesJson })
+    if (moviesJson.meta.currentPage === 1) {
+      return view.render('pages/movies/index', { movies, moviesJson })
+    }
+    else if(moviesJson.meta.lastPage >= moviesJson.meta.currentPage) {
+      return view.render('components/layouts/partials/movies', { movies, moviesJson })
+    }
 
   }
 
