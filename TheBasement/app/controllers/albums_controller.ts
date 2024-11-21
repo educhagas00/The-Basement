@@ -30,8 +30,17 @@ export default class AlbumsController {
         const albums = await query.paginate(page, limit)
         const albumsJson = albums.toJSON()
 
-        // return songsJson
-        return view.render('pages/albums/index', { albums, albumsJson })
+        console.log(albumsJson.meta)
+
+        if (albumsJson.meta.currentPage === 1) {
+            return view.render('pages/albums/index', { albums, albumsJson })
+        }
+        else if(albumsJson.meta.lastPage >= albumsJson.meta.currentPage) {
+            return view.render('components/layouts/partials/albums', { albums, albumsJson })
+        }
+        // else if (albumsJson.meta.currentPage > 1) {
+        //     return view.render('components/layouts/partials/albums', { albums, albumsJson })
+        // }
     }
 
     // busca um Album pelo id
