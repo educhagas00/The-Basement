@@ -1,4 +1,4 @@
-import authConfig from '#config/auth'
+// import authConfig from '#config/auth'
 import User from '#models/user'
 import { createAuthValidator } from '#validators/auth'
 import type { HttpContext } from '@adonisjs/core/http'
