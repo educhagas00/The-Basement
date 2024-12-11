@@ -1,7 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import {
     urlAlbumValidator,
-    createAlbumValidator,
     updateAlbumValidator,
 } from '#validators/album'
 import Album from '#models/album'
@@ -167,9 +166,9 @@ export default class AlbumsController {
 
     async update({ view, request, response }: HttpContext) {
 
-        const album = await Album.findOrFail(request.input('albumId'))
+        const album = await Album.findOrFail(request.input('albumId').validateUsing(urlAlbumValidator))
 
-        const data = request.only(['name', 'price', 'duration'])
+        const data = await request.validateUsing(updateAlbumValidator)
 
         if (!album) {
             return view.render('pages/errors/404')

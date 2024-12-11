@@ -25,8 +25,8 @@ export const createAlbumValidator = vine.compile(
 export const updateAlbumValidator = vine.compile( 
     vine.object({
         albumId: vine.string().minLength(5),
-        name: vine.string().trim().minLength(3),
-        price: vine.number().min(0),
-        duration: vine.number().min(0),
+        name: vine.string().trim().minLength(3).optional(),
+        price: vine.number().min(0).optional(),
+        duration: vine.number().min(0).optional(),
     })
 )
