@@ -24,7 +24,7 @@ export default class UsersController {
         return response.redirect().toRoute('auth.signin')
     }
 
-    async update({ auth, view, request, response }: HttpContext) {
+    async update({ auth, request, response }: HttpContext) {
 
         const user = await auth.getUserOrFail()
 
@@ -59,7 +59,4 @@ export default class UsersController {
     async updateUser({ view }: HttpContext) {
         return view.render('pages/users/updateUser')
     }
-
-
-    
 }
