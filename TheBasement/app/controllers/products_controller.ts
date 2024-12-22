@@ -2,89 +2,88 @@ import Product from '#models/product'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class ProductsController {
+  async index({ view, request }: HttpContext) {
+    const page = request.input('page', 1)
+    const limit = 10
 
-    async index({ view, request }: HttpContext) {
-        const page = request.input('page', 1)
-        const limit = 10
+    const payload = request.only(['name'])
 
-        const payload = request.only(['name'])
+    console.log(payload)
 
-        console.log(payload)
+    // esse cara sabe buscar em produtos!
+    const query = Product.query()
 
-        // esse cara sabe buscar em produtos!
-        const query = Product.query()
-
-        if (payload.name && payload.name.length > 0) {
-            query.where('name', 'like', `%${payload.name}%`)
-        }
-
-        const products = await query.paginate(page, limit)
-
-        return view.render('pages/products/index', { products })
+    if (payload.name && payload.name.length > 0) {
+      query.where('name', 'like', `%${payload.name}%`)
     }
 
-    async store({ request, response }: HttpContext) {
-        // pega os dados do formulário
-        const payload = request.only(['name', 'price', 'description', 'duration', 'release_date'])
+    const products = await query.paginate(page, limit)
 
-        // cria um novo produto usando os dados do formulário e salva no banco de dados
-        const product = await Product.create(payload)
+    return view.render('pages/products/index', { products })
+  }
 
-        // retorna o produto criado
-        return response.redirect().toRoute('products.show', { id: product.id })
+  async store({ request, response }: HttpContext) {
+    // pega os dados do formulário
+    const payload = request.only(['name', 'price', 'description', 'duration', 'release_date'])
+
+    // cria um novo produto usando os dados do formulário e salva no banco de dados
+    const product = await Product.create(payload)
+
+    // retorna o produto criado
+    return response.redirect().toRoute('products.show', { id: product.id })
+  }
+
+  async create({ view }: HttpContext) {
+    // renderiza a view products.create
+    return view.render('pages/songs/addTrack')
+  }
+
+  async show({ view, params }: HttpContext) {
+    // busca um produto pelo id ou retorna um erro 404 caso não encontre
+    const product = await Product.findOrFail(params.id)
+
+    // renderiza a view products.show com o produto encontrado
+    return view.render('pages/products/show', { product })
+  }
+
+  async search({ view, request }: HttpContext) {
+    const name = request.input('name')
+    let products: Product[] = []
+
+    const query = Product.query()
+
+    if (name) {
+      products = await query.where('name', 'like', `%${name}%`)
     }
 
-    async create({ view }: HttpContext) {
-        // renderiza a view products.create
-        return view.render('pages/songs/addTrack')
-    }
+    return view.render('pages/products/search', { products })
+  }
 
-    async show({ view, params }: HttpContext) {
-        // busca um produto pelo id ou retorna um erro 404 caso não encontre
-        const product = await Product.findOrFail(params.id)
+  async update({ params, request, response }: HttpContext) {
+    // busca um produto pelo id ou retorna um erro 404 caso não encontre
+    const product = await Product.findOrFail(params.id)
 
-        // renderiza a view products.show com o produto encontrado
-        return view.render('pages/products/show', { product })
-    }
+    // pega os dados do formulário
+    const payload = request.only(['name', 'price', 'description'])
 
-    async search({ view, request }: HttpContext) {
-        const name = request.input('name')
-        let products: Product[] = []
+    // atualiza o produto com os dados do formulário
+    product.merge(payload)
 
-        const query = Product.query()
+    // salva o produto no banco de dados
+    await product.save()
 
-        if(name) {
-            products = await query.where('name', 'like', `%${name}%`)
-        }
+    // retorna o produto atualizado
+    return response.redirect().toRoute('products.show', { id: product.id })
+  }
 
-        return view.render('pages/products/search', { products })
-    }
+  async destroy({ params }: HttpContext) {
+    // busca um produto pelo id ou retorna um erro 404 caso não encontre
+    const product = await Product.findOrFail(params.id)
 
-    async update({ params, request, response }: HttpContext) {
-        // busca um produto pelo id ou retorna um erro 404 caso não encontre
-        const product = await Product.findOrFail(params.id)
+    // deleta o produto
+    await product.delete()
 
-        // pega os dados do formulário
-        const payload = request.only(['name', 'price', 'description'])
-
-        // atualiza o produto com os dados do formulário
-        product.merge(payload)
-
-        // salva o produto no banco de dados
-        await product.save()
-
-        // retorna o produto atualizado
-        return response.redirect().toRoute('products.show', { id: product.id })
-    }
-
-    async destroy({ params }: HttpContext) {
-        // busca um produto pelo id ou retorna um erro 404 caso não encontre
-        const product = await Product.findOrFail(params.id)
-
-        // deleta o produto
-        await product.delete()
-
-        // retorna uma mensagem de sucesso
-        return { message: `Product ${params.id} deleted` }
-    }
+    // retorna uma mensagem de sucesso
+    return { message: `Product ${params.id} deleted` }
+  }
 }

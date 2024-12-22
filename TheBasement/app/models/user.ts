@@ -32,7 +32,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   //declare phone: string
 
   // @column()
-  // declare birthdate: DateTime | null 
+  // declare birthdate: DateTime | null
   //tavam dando merdaaaaaaaaa
 
   @column()

@@ -9,7 +9,7 @@ export const createUserValidator = vine.compile(
     firstName: vine.string().minLength(3).trim(),
     lastName: vine.string().minLength(3).trim(),
     email: vine.string().email().trim(),
-    password: vine.string().minLength(3).confirmed()
+    password: vine.string().minLength(3).confirmed(),
   })
 )
 
@@ -22,6 +22,6 @@ export const updateUserValidator = vine.compile(
     username: vine.string().minLength(3).trim().optional(),
     firstName: vine.string().minLength(3).trim().optional(),
     lastName: vine.string().minLength(3).trim().optional(),
-    password: vine.string().minLength(3)
+    password: vine.string().minLength(3),
   })
-)  
+)

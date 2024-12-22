@@ -5,7 +5,6 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-
       table.integer('movie_id').notNullable()
       table.string('title').notNullable()
       table.text('description').notNullable()
