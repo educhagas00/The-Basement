@@ -19,6 +19,8 @@ Feeling a little nostalgic? Please be welcome to explore our VHS and Vinyl e-com
 
 ![image](https://github.com/user-attachments/assets/e7c6ccbe-f5d4-4ba3-b96c-a24321527669)
 
+![image](https://github.com/user-attachments/assets/e0650851-a692-4a1a-95be-c625c21e3876)
+
 
 ## Installation
 
